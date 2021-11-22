@@ -24,20 +24,6 @@ router.post("/api/login", async (req, res) => {
   }
 });
 
-router.get("/:_id", parseToken, async (req,res)=> {
-    console.log(res.locals)
-    try{
-        let user = await User.findById(res.locals)
-        .select(["-password"])
-        .populate({ path: "friends" })
-        .populate({ path: "recommended" })
-        .populate({ path: "readingList" })
-        .populate({ path: "usercurrent" });
-        res.status(200).json(user)
-    }catch(err){
-        res.status(404).send(err.message)
-    }
-    
-})
+
 
 module.exports = router;

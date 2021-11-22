@@ -24,6 +24,7 @@ app.use(express.json());
 // Routes
 // =============================================================
 app.use(require("./routes/user-routes"))
+app.use(require("./routes"))
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 
