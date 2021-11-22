@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-// const cors = require("cors");
+const cors = require("cors");
 const db = require("./config/db-connection");
 // Sets up the Express App
 require("dotenv").config()
@@ -15,7 +15,7 @@ app.use(express.json());
 //   origin: 'https://bjh-hop-estore.herokuapp.com'
 // }
 // corsOptions
-// app.use(cors(corsOptions));
+app.use(cors());
 // Static directory
 // app.use(express.static("public"));
 /////////////////////////////////
@@ -23,7 +23,7 @@ app.use(express.json());
 
 // Routes
 // =============================================================
-app.use(require("./routes/user-routes"))
+
 app.use(require("./routes"))
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
