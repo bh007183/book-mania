@@ -6,9 +6,10 @@ var mongoose = require("mongoose");
 router.get("/", parseToken, async (req, res) => {
   console.log(res.locals);
   try {
-    let user = await User.findById(res.locals)
+    let user = await User.findById(res.locals._id)
       .select(["-password"])
-      .populate({ path: "friends" })
+      .populate({ path: "following" })
+      .populate({path: "followers"})
       .populate({ path: "recommended" })
       .populate({ path: "readingList" })
       .populate({ path: "usercurrent" });
@@ -20,7 +21,7 @@ router.get("/", parseToken, async (req, res) => {
 router.get("/readinglist", parseToken, async (req, res) => {
   console.log(res.locals);
   try {
-    let user = await User.findById(res.locals)
+    let user = await User.findById(res.locals._id)
       .select(["-password"])
       .populate({ path: "readingList" });
 
@@ -34,7 +35,7 @@ router.get("/friends", parseToken, async (req, res) => {
   console.log("this route");
   console.log(res.locals);
   try {
-    let user = await User.findById(res.locals)
+    let user = await User.findById(res.locals._id)
       .select(["-password"])
       .populate({
         path: "following",
@@ -52,10 +53,11 @@ router.post("/follow", parseToken, async (req, res) => {
   try {
     let user = await User.findByIdAndUpdate(res.locals._id, {
       $addToSet: { following: req.body.followId },
-    });
+
+    },{new: true});
     let other = await User.findByIdAndUpdate(req.body.followId, {
       $addToSet: { followers: res.locals._id },
-    });
+    },{new: true});
 
     res.sendStatus(201);
   } catch (err) {
@@ -87,12 +89,14 @@ router.post("/recommend", parseToken, async (req, res) => {
           recommended: mongoose.Types.ObjectId(res.locals._id),
         },
       },
-    });
+    },{new: true});
 
     res.sendStatus(201);
   } catch (err) {
     res.status(400).send(err.message);
   }
 });
+
+
 
 module.exports = router;

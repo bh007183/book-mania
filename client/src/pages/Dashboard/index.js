@@ -7,7 +7,7 @@ export default function Dashboard() {
     const dispatch = useDispatch()
     const error = useSelector(state => state.Store.User.Error)
     let token = localStorage.getItem("Token") || null
-    dispatch(loginUserApi({token: token}))
+    
 
      if(error){
         return <Navigate replace to="/login" />

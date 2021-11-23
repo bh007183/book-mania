@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.entryContain{
+  position: relative;
+}
+.entryRows{
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  width: 100vw;
+  height: 50vh;
+}
+.entryForm{
+  background-color: #a9c25d;
+  border-radius: 10px;
+  min-width: 300px;
+  min-height: 450px;
+  height: 30%;
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.centerAlign{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

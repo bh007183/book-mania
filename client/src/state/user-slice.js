@@ -4,14 +4,18 @@ import {apiCallBegan} from "./actions"
 const slice = createSlice({
     name: 'User',
     initialState: {
-        Error: ""
+        Error: "",
+        loggedIn: false
     },
     reducers: {
         setUser: (User, action) => {
+            console.log(action.payload)
              User = action.payload
         },
         loginUser: (User, action) => {
-             User = action.payload
+           
+            localStorage.setItem("Token", action.payload.token)
+            User.loggedIn = true
         },
         error: (User, action) => {
             console.log(action)
@@ -21,7 +25,7 @@ const slice = createSlice({
 })
 
 
-export const {setUser, error} = slice.actions
+export const {setUser, error, loginUser} = slice.actions
 
 export default slice.reducer
 
@@ -34,11 +38,11 @@ export const createUserApi = (data) => apiCallBegan({
 
 })
 export const loginUserApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/api/user",
+    url: "http://localhost:8080/api/login",
     header: data.token,
     method: "POST",
     data,
-    onSuccess: setUser.type,
+    onSuccess: loginUser.type,
     onError: error.type,
 
 })

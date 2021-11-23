@@ -1,0 +1,22 @@
+.firstCol{
+    grid-column: 1;
+    background-color: #f5eec2;
+}
+.secCol{
+   grid-column: 2;
+    background-color: #39395f;
+}
+.thirdCol{
+   grid-column: 1;
+    background-color: #416a59;
+}
+.fourthCol{
+   grid-column: 2;
+    background-color: #73a24e;
+}
+.inputParent{
+    margin-top: 40px;
+}
+.inputGrandparent{
+    margin-top: 40%;
+}
