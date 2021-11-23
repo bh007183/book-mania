@@ -1,6 +1,6 @@
 const {Schema, model} = require("mongoose")
 const bcrypt = require("bcrypt")
-
+const bookSchema = require("./Book")
 
 const userSchema = new Schema({
     firstName:{
@@ -37,15 +37,15 @@ const userSchema = new Schema({
     },
 
     recommended: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+        type: [bookSchema]
     },
 
     readingList: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+        type: [bookSchema]
     },
 
     usercurrent: {
-        type: { type: Schema.Types.ObjectId, ref: 'Book' }
+        type:  bookSchema
     }
 
 

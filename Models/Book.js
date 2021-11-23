@@ -14,9 +14,12 @@ const bookSchema = new Schema({
 
     comments: {
         type: [commentSchema ]
+    }, 
+
+    recommened: {
+type: { type: Schema.Types.ObjectId, ref: 'User' }
     }
 
 })
 
-const Book = model("Book", bookSchema)
-module.exports = Book
+module.exports = bookSchema

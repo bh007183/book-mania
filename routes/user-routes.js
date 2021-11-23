@@ -1,17 +1,19 @@
 const router = require("express").Router();
 const { User } = require("../Models");
 const { signToken, compare, parseToken } = require("../utils/auth");
-router.post("/api/user", async (req, res) => {
+router.post("/user", async (req, res) => {
   try {
+   console.log('this')
     let user = await User.create(req.body);
     let token = await signToken(user);
-    res.sendStatus(200).json({ token });
+    res.status(200).json({ token });
   } catch (err) {
+    console.log(err)
     res.status(400).send(err.message);
   }
 });
 
-router.post("/api/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     let user = await User.findOne({ email: req.body.email })
     if (!user || !compare(user, req.body)) {

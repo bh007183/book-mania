@@ -44,4 +44,30 @@ router.get("/friends", parseToken, async (req,res)=> {
     
 })
 
+router.post("/follow",  parseToken, async (req, res) => {
+    try {
+      
+      let user = await User.findByIdAndUpdate(res.locals._id, {
+          $addToSet: {friends: req.body.followId}
+      })
+      
+      res.sendStatus(201);
+    } catch (err) {
+      res.status(400).send(err.message);
+    }
+  });
+
+router.post("/recommend",  parseToken, async (req, res) => {
+    try {
+      
+      let user = await User.findByIdAndUpdate(res.locals._id, {
+          $addToSet: {friends: req.body.followId}
+      })
+      
+      res.sendStatus(201);
+    } catch (err) {
+      res.status(400).send(err.message);
+    }
+  });
+
 module.exports = router;
