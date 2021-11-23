@@ -32,6 +32,7 @@ try{
         throw new Error("User must login")
     }
     let data = await jwt.verify(token, process.env.JSON_DUBLIN);
+    console.log(data)
     res.locals._id = data._id
     next()
 }catch(err){

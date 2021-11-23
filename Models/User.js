@@ -32,7 +32,10 @@ const userSchema = new Schema({
         maxlength: 8,
     },
 
-    friends: {
+    following: {
+        type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    },
+    followers: {
         type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
     },
 

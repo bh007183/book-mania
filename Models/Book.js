@@ -16,8 +16,8 @@ const bookSchema = new Schema({
         type: [commentSchema ]
     }, 
 
-    recommened: {
-type: { type: Schema.Types.ObjectId, ref: 'User' }
+    recommended: {
+      type: Schema.Types.ObjectId, ref: 'User' 
     }
 
 })
