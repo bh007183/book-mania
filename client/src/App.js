@@ -5,6 +5,8 @@ import Login from "./pages/login"
 import Create from "./pages/create"
 import {Provider} from "react-redux"
 import configureStore from "./state/configureStore"
+
+import React from "react"
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,7 +20,9 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Dashboard/>}/>
+         
+          <Route exact path="/" element={<Dashboard protect={true}/>}/>
+         
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/create-account" element={<Create/>}/>
         </Routes>

@@ -8,15 +8,14 @@ const slice = createSlice({
         loggedIn: false
     },
     reducers: {
-        setUser: (User, action) => {
+        setToken: (User, action) => {
             localStorage.setItem("Token", action.payload.token)
             User.loggedIn = true
         },
-        loginUser: (User, action) => {
-           
-            localStorage.setItem("Token", action.payload.token)
-            User.loggedIn = true
+        notLoggedIn: (User, action) => {
+            User.loggedIn = false
         },
+        
         error: (User, action) => {
             console.log(action)
             User.Error = action.payload
@@ -25,7 +24,7 @@ const slice = createSlice({
 })
 
 
-export const {setUser, error, loginUser} = slice.actions
+export const { error, setToken,notLoggedIn} = slice.actions
 
 export default slice.reducer
 
@@ -33,7 +32,7 @@ export const createUserApi = (data) => apiCallBegan({
     url: "http://localhost:8080/api/user",
     method: "POST",
     data,
-    onSuccess: setUser.type,
+    onSuccess: setToken.type,
     onError: error.type,
 
 })
@@ -42,7 +41,7 @@ export const loginUserApi = (data) => apiCallBegan({
     header: data.token,
     method: "POST",
     data,
-    onSuccess: loginUser.type,
+    onSuccess: setToken.type,
     onError: error.type,
 
 })

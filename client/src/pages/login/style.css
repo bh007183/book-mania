@@ -20,3 +20,8 @@
 .inputGrandparent{
     margin-top: 40%;
 }
+.alter{
+    position: absolute;
+    bottom: 30px;
+    left: 15px
+}

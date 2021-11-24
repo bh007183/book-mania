@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {handleFormInput} from "../../utils"
 import {useDispatch, useSelector} from "react-redux"
 import {loginUserApi} from "../../state/user-slice"
-import {  Navigate } from 'react-router-dom'
+import {  Navigate, Link } from 'react-router-dom'
 import "./style.css"
 
 export default function Login() {
@@ -40,7 +40,9 @@ if(loggedIn){
                 <button>Login</button>
                 </div>
                 </section>
-                
+                <div className="alter">
+                <Link to="/create-account">Dont have an account?</Link>
+            </div>
             </form>
 
             <div className="entryRows">
@@ -52,6 +54,8 @@ if(loggedIn){
             <div className="thirdCol"></div>
                 <div className="fourthCol"></div>
             </div>
+
+            
             
         </div>
     )

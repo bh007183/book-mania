@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {handleFormInput} from "../../utils"
 import "./style.css"
 import {createUserApi} from "../../state/user-slice"
-import {  Navigate } from 'react-router-dom'
+import {  Navigate, Link } from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux"
 export default function Create() {
     const [create, setCreate] = useState({
@@ -12,13 +12,16 @@ export default function Create() {
         lastName: ""
     })
 const dispatch = useDispatch()
-
+const loggedIn = useSelector(state =>  state.Store.User.loggedIn)
 const handleCreate = (event) => {
     event.preventDefault()
     dispatch(createUserApi(create))
 }
 
-
+if(loggedIn){
+    console.log(loggedIn)
+    return <Navigate replace to="/"/>;
+}
     
         return (
             <div className="entryContain" >
@@ -43,6 +46,9 @@ const handleCreate = (event) => {
                     <button>Create</button>
                     </div>
                     </section>
+                    <div className="alter">
+                <Link to="/login">Login</Link>
+            </div>
                     
                 </form>
     
