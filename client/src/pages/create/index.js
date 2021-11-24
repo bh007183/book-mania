@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import {handleFormInput} from "../../utils"
 import "./style.css"
-
+import {createUserApi} from "../../state/user-slice"
+import {  Navigate } from 'react-router-dom'
+import {useDispatch, useSelector} from "react-redux"
 export default function Create() {
     const [create, setCreate] = useState({
         email: "",
@@ -9,14 +11,19 @@ export default function Create() {
         firstName: "",
         lastName: ""
     })
+const dispatch = useDispatch()
 
+const handleCreate = (event) => {
+    event.preventDefault()
+    dispatch(createUserApi(create))
+}
 
 
     
         return (
             <div className="entryContain" >
     
-                <form className="entryForm ">
+                <form onSubmit={handleCreate} className="entryForm ">
                     <section className="inputGrandparent">
                     <div className="centerAlign inputParent">
                     <input onChange={(event)=> {handleFormInput(event, create, setCreate)}}  placeholder="firstName" name="firstName" value={create.firstName}></input>
@@ -33,7 +40,7 @@ export default function Create() {
                     
                     
                     <div className="centerAlign inputParent">
-                    <button>Login</button>
+                    <button>Create</button>
                     </div>
                     </section>
                     

@@ -9,8 +9,8 @@ const slice = createSlice({
     },
     reducers: {
         setUser: (User, action) => {
-            console.log(action.payload)
-             User = action.payload
+            localStorage.setItem("Token", action.payload.token)
+            User.loggedIn = true
         },
         loginUser: (User, action) => {
            
