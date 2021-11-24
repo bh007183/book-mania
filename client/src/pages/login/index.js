@@ -12,15 +12,17 @@ export default function Login() {
     })
   
     const dispatch = useDispatch()
-    const loggedIn = useSelector(state =>  state.Store.User.loggedIn)
+    const user = useSelector(state =>  state.Store.User)
+
 
    const handleLogin = (event) => {
        event.preventDefault()
        dispatch(loginUserApi(login))
    }
-if(loggedIn){
-    console.log(loggedIn)
-    return <Navigate to="/"/>;
+if(user.loggedIn){
+    console.log(user)
+    let route = `/dashboard`
+    return <Navigate to={route} />;
 }
     return (
         <div className="entryContain" >

@@ -31,13 +31,14 @@ const userSchema = new Schema({
         minLength: 4,
         maxlength: 8,
     },
+    pendingconnection: {
+        type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    },
 
-    following: {
+    connection: {
         type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
     },
-    followers: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
-    },
+    
 
     recommended: {
         type: [bookSchema]

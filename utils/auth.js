@@ -20,6 +20,7 @@ module.exports = {
 
     parseToken: async (req, res, next) => {
         let token;
+        
 try{
     if(!req.headers){
         token = false
@@ -36,6 +37,7 @@ try{
     res.locals._id = data._id
     next()
 }catch(err){
+    console.log(err)
     res.status(404).send(err.message)
 }
        

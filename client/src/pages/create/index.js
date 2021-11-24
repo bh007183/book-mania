@@ -12,15 +12,16 @@ export default function Create() {
         lastName: ""
     })
 const dispatch = useDispatch()
-const loggedIn = useSelector(state =>  state.Store.User.loggedIn)
+const user = useSelector(state =>  state.Store.User)
 const handleCreate = (event) => {
     event.preventDefault()
     dispatch(createUserApi(create))
 }
 
-if(loggedIn){
-    console.log(loggedIn)
-    return <Navigate replace to="/"/>;
+if(user.loggedIn){
+    console.log(user)
+    let route = `/dashboard`
+    return <Navigate to={route} />;
 }
     
         return (

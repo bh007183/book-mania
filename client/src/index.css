@@ -6,6 +6,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+:root {
+  --blue: #39395f;
+  --green: #73a24e;
+  --light: #f5eec2;
+  --darkgreen: #416a59;
+  --lightgreen: #a9c25d;
+
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -38,4 +46,16 @@ code {
   justify-content: center;
   align-items: center;
 }
+.mainPageContain{
+  background-color: var(--light);
+  min-height: 100vh;
+}
 
+.carouselContain{
+  height: 325px;
+  text-align: center;
+}
+.carouselContain h3{
+  margin: 0%;
+  padding: 15px;
+}

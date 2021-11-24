@@ -5,6 +5,7 @@ import Login from "./pages/login"
 import Create from "./pages/create"
 import {Provider} from "react-redux"
 import configureStore from "./state/configureStore"
+import Nav from "./components/nav"
 
 import React from "react"
 import {
@@ -19,9 +20,10 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <Nav/>
         <Routes>
          
-          <Route exact path="/" element={<Dashboard protect={true}/>}/>
+          <Route exact path="/dashboard" element={<Dashboard protect={true}/>}/>
          
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/create-account" element={<Create/>}/>

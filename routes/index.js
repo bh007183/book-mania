@@ -5,7 +5,7 @@ const postUser = require("./user-routes.js")
 
 
 router.use("/api", postUser)
-router.use("/:_id", parseToken, protectedRoutes)
+router.use("/dashboard", parseToken, protectedRoutes)
 router.use((req, res)=> {
     res.status(500).send("No matching routes")
 })
