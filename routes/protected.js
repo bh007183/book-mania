@@ -119,6 +119,31 @@ router.post("/recommend", parseToken, async (req, res) => {
   }
 });
 
+router.post("/currentreading", parseToken, async (req, res) => {
+  try {
+    let user = await User.findByIdAndUpdate(res.locals._id, {
+      usercurrent: req.body
+
+    },{new: true});
+    res.sendStatus(201);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+
+
+router.post("/readinglist", parseToken, async (req, res) => {
+  try {
+    let user = await User.findByIdAndUpdate(res.locals._id, {
+      readinglist: req.body
+
+    },{new: true});
+    res.sendStatus(201);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+
 
 
 module.exports = router;

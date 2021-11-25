@@ -18,31 +18,12 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext'
 import "./style.css";
 
-export default function Recommended(props) {
+export default function RecommendCards(props) {
     console.log(props)
     console.log("this")
-    return (
-    //      <Card sx={{ maxWidth: 345 }}>
-    //     <CardMedia
-    //       component="img"
-    //       height="140"
-    //       image={ props.recommended.thumbnail}
-    //       alt="green iguana"
-    //     />
-    //     <CardContent>
-    //       <Typography gutterBottom variant="h5" component="div">
-    //         { props.recommended.title}
-    //       </Typography>
-    //       <Typography variant="body2" color="text.secondary">
-    //         { props.recommended.description}
-    //       </Typography>
-    //     </CardContent>
-    //     <CardActions>
-    // <p>{"recommended by:" + " " +  props.recommended.recommended.firstName + " " +  props.recommended.recommended.lastName}</p>
-    //       <Button data-id={ props.recommended._id} size="small">Learn More</Button>
-    //     </CardActions>
-    //   </Card>
-       <Card className="recommendedCard" sx={{ display: 'flex' }}>
+   
+      return(
+         <Card className="recommendedCard" sx={{ display: 'flex' }}>
        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
          <CardContent sx={{ flex: '1 0 auto' }}>
            <Typography component="div" variant="h5">
@@ -64,5 +45,7 @@ export default function Recommended(props) {
          alt="Live from space album cover"
        />
      </Card>
-    )
+      )
+   
+    
 }
