@@ -12,11 +12,11 @@ import ConnectionReadingCards from "../../components/cards/ConnectionReading";
 import "swiper/swiper-bundle.min.css";
 // import "swiper/css/pagination"
 
-import "./style.css";
+
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination } from "swiper";
-
+import "./style.css";
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -48,6 +48,19 @@ export default function Dashboard() {
           spaceBetween={30}
           pagination={{
             clickable: true,
+          }}
+          breakpoints= {{
+           
+            // when window width is >= 480px
+            700: {
+              slidesPerView: 2,
+              spaceBetween: 30
+            },
+            // when window width is >= 640px
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 40
+            }
           }}
           className="mySwiper"
         >
