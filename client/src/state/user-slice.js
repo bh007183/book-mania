@@ -9,6 +9,7 @@ const slice = createSlice({
         loggedIn: false,
         firstName : "",
         lastName: "",
+        email: "",
         pendingconnection: [],
         connection: [],
         readingList: [],
@@ -33,6 +34,7 @@ const slice = createSlice({
             
             User.firstName = action.payload.firstName;
             User.lastName= action.payload.lastName;
+            user.email = action.payload.email
             User.pendingconnection= action.payload.pendingconnection;
             User.connection= action.payload.connection;
             User.readingList= action.payload.readingList;
