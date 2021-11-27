@@ -37,6 +37,25 @@ export default function Dashboard() {
 
   return (
     <div className="mainPageContain">
+      <div id="dashboardMe">
+        <p id="dashboardText">Hey There {state.firstName + " " + state.lastName}!</p>
+        <span>Here is what we have going on:</span>
+        <div id="statsBoxWraper">
+          <div id="statsBox1">
+            <p>Number of Books Read</p>
+            <h3>{state.readingHistory.length}</h3>
+            
+
+          </div>
+          <div id="statsBox2">
+          <p>You Are Currently Reading:</p>
+            <h3>{state.usercurrent.title}</h3>
+
+          </div>
+
+        </div>
+
+      </div>
       <div
         className="carouselContain"
         style={{ backgroundColor: "var(--lightgreen)" }}
@@ -77,13 +96,26 @@ export default function Dashboard() {
       >
         <h3>Your Friends Are Reading</h3>
         <Swiper
-          slidesPerView={"auto"}
-          centeredSlides={true}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          className="mySwiper"
+           slidesPerView={"auto"}
+           centeredSlides={true}
+           spaceBetween={30}
+           pagination={{
+             clickable: true,
+           }}
+           breakpoints= {{
+            
+             // when window width is >= 480px
+             700: {
+               slidesPerView: 2,
+               spaceBetween: 30
+             },
+             // when window width is >= 640px
+             1000: {
+               slidesPerView: 3,
+               spaceBetween: 40
+             }
+           }}
+           className="mySwiper"
         >
           {state.connection.map((book) => {
             if (book.usercurrent) {

@@ -47,6 +47,9 @@ const userSchema = new Schema({
     readingList: {
         type: [bookSchema]
     },
+    readingHistory: {
+        type: [bookSchema]
+    },
 
     usercurrent: {
         type:  bookSchema

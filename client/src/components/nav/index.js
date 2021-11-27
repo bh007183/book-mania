@@ -121,9 +121,11 @@ export default function Nav() {
           </div>
           <div id="navLinksContain">
           <Hidden smDown  >
-              <Link to="/who-we-are"className="navLinks">Who We Are</Link>
-              <Link to="/costa-rica-mission-trips"className="navLinks">Get Involved</Link>
-              <Link to="/contact"className="navLinks">Contact</Link>
+              <Link to="/dashboard"className="navLinks">Dashboard</Link>
+              <Link to="/browse"className="navLinks">Browse</Link>
+              <Link to="/manage-account"className="navLinks">Manage Account</Link>
+             
+            
 
 
               
@@ -175,23 +177,18 @@ export default function Nav() {
            <Link  name="whoWeAre" onClick={handleDrawerClose} className="link"to="/who-we-are">
             <ListItem button >
               <ListItemIcon> <InfoIcon className="icon"/></ListItemIcon>
-              <ListItemText primary="Who We Are" />
+              <ListItemText primary="Dashboard" />
             </ListItem>
             </Link>
             <Divider />
            <Link name="contact" onClick={handleDrawerClose}  className="link"to="/contact">
             <ListItem button >
               <ListItemIcon> <EmailIcon className="icon"/></ListItemIcon>
-              <ListItemText primary="Contact Us" />
+              <ListItemText primary="Manage Account" />
             </ListItem>
             </Link>
             <Divider />
-           <Link name="whatWeDo" onClick={handleDrawerClose}  className="link"to="/costa-rica-mission-trips">
-            <ListItem button >
-              <ListItemIcon> <GroupWorkIcon className="icon"/></ListItemIcon>
-              <ListItemText primary="Get Involved" />
-            </ListItem>
-            </Link>
+           
             <Divider />
             <ListItem style={{display: "flex", justifyContent: "center"}} >
          

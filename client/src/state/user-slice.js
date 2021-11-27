@@ -7,8 +7,8 @@ const slice = createSlice({
         UserId: "",
         Error: "",
         loggedIn: false,
-        fName : "",
-        lName: "",
+        firstName : "",
+        lastName: "",
         pendingconnection: [],
         connection: [],
         readingList: [],
@@ -31,8 +31,8 @@ const slice = createSlice({
         },
         setUser: (User, action) => {
             
-            User.fName = action.payload.firstName;
-            User.lName= action.payload.lastName;
+            User.firstName = action.payload.firstName;
+            User.lastName= action.payload.lastName;
             User.pendingconnection= action.payload.pendingconnection;
             User.connection= action.payload.connection;
             User.readingList= action.payload.readingList;
