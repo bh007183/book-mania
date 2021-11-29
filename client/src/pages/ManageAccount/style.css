@@ -1,5 +1,90 @@
 
-#editContain div{
- /*  */
+#manageAccount{
+    background-color: var(--light);
+    min-height: 100vh;
+    text-align: center;
+}
+#manageAccount h1{
+    margin: 0px;
+    padding: 10px;
 }
 
+#modal{
+    position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: var(--blue);
+  border-radius: 10px;
+  
+}
+
+.inputContain{
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    
+}
+.inputContain > input{
+    width: 50%;
+    border: .5px solid rgb(121, 121, 121) ;
+    border-radius: 10px;
+    
+}
+#editGrandparent{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#saveChanges{
+    margin-top: 20px;
+}
+
+.MuiListItem-root{
+    width: 40% !important;
+    background-color: var(--lightgreen) !important;
+    border-radius: 10px !important;
+
+}
+@media only screen and (max-width: 800px){
+    .inputContain{
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px
+    }
+   #editContain{
+       
+    width: 100%;
+   }
+   /* #editGrandparent{
+    width: 100%;
+   } */
+}
+@media only screen and (max-width: 574px){
+    #modal{
+        width: 90%;
+        border-radius: 10px;
+    }
+    .inputContain > input{
+        
+        width: 100vw;
+        height: 25px;
+        
+        
+    }
+    .inputContain{
+        padding: 12px;
+        margin: 0px;
+    }
+    
+    .MuiListItem-root{
+        margin-top: 10px !important;
+        height: 25px !important;
+        width: 100vw !important;
+    
+    }
+   
+}

@@ -6,7 +6,7 @@ const slice = createSlice({
     initialState: {
         UserId: "",
         Error: "",
-        loggedIn: false,
+        Success: "",
         firstName : "",
         lastName: "",
         email: "",
@@ -31,6 +31,19 @@ const slice = createSlice({
             console.log(action)
             User.Error = action.payload
         },
+        success: (User, action) => {
+            User.Success = true
+
+        },
+
+        resetError: (User, action) => {
+            console.log(action)
+            User.Error = ""
+        },
+        resetSuccess: (User, action) => {
+            User.Success = ""
+
+        },
         setUser: (User, action) => {
             
             User.firstName = action.payload.firstName;
@@ -47,7 +60,7 @@ const slice = createSlice({
 })
 
 
-export const { error, setToken,notLoggedIn, setUser} = slice.actions
+export const { error, setToken,notLoggedIn, setUser, success, resetSuccess, resetError} = slice.actions
 
 export default slice.reducer
 
@@ -85,7 +98,7 @@ export const updateUserApi = (data) => apiCallBegan({
     },
     method: "PUT",
     data,
-    onSuccess: setUser.type,
+    onSuccess: success.type,
     onError: error.type,
 
 })

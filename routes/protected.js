@@ -148,18 +148,19 @@ router.post("/readinglist", parseToken, async (req, res) => {
 router.put("/user", parseToken, async (req, res) => {
   try {
     let user = await User.findById(res.locals._id).select("password");
-    
+    console.log(user)
    
     if(compare(user, req.body)){
       let updatedUser = await User.findOneAndUpdate({_id: res.locals._id}, req.body.edit, {new: true});
       res.json(updatedUser)
 
     }else{
-      res.sendStatus(403);
+      res.status(400).send("Invalid password");
     }
 
    
   } catch (err) {
+    console.log(err)
     res.status(400).send(err.message);
   }
 });
