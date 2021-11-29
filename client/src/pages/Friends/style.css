@@ -1,0 +1,16 @@
+#manageConnection{
+    height: 100vh;
+    background-color: var(--light);
+    text-align: center;
+
+}
+#manageConnection > h1{
+    margin: 0px;
+    padding:10px
+}
+#searchConnection{
+
+}
+#viewConnections{
+
+}

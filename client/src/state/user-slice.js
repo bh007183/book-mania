@@ -102,3 +102,14 @@ export const updateUserApi = (data) => apiCallBegan({
     onError: error.type,
 
 })
+export const findUserApi = (data) => apiCallBegan({
+    url: "http://localhost:8080/dashboard/finduser",
+    headers: {
+        authorization: data.token,
+    },
+    method: "GET",
+    data,
+    onSuccess: success.type,
+    onError: error.type,
+
+})

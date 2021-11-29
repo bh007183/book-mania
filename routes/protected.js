@@ -166,5 +166,22 @@ router.put("/user", parseToken, async (req, res) => {
 });
 
 
+router.get("/finduser", parseToken, async (req, res) => {
+  let firstName = req.body.name.split(" ")[0]
+  let lastName = req.body.name.split(" ")[1]
+  try {
+    let user = await User.find({
+      "firstName": { $regex: new RegExp("^" + firstName, "i") },
+      "lastName": { $regex: new RegExp("^" + lastName, "i") }
+    
+    });
+    
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+
+
 
 module.exports = router;
