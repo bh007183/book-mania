@@ -22,7 +22,6 @@ const userSchema = new Schema({
             message: props => `${props.value} is not a valid email address!`,
         },
         
-       
         required: [true, 'User email is required']
     },
     password:{
@@ -30,6 +29,7 @@ const userSchema = new Schema({
         required: [true, 'User password is required'],
         minLength: 4,
         maxlength: 8,
+        select: false
     },
     pendingconnection: {
         type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
@@ -62,8 +62,19 @@ const userSchema = new Schema({
 })
 userSchema.pre('save', function(next) {
     this.password = bcrypt.hashSync(this.password, 10)
-    
     next();
+});
+
+userSchema.pre("findOneAndUpdate", async function (next) {
+    try {
+      if (this._update.password) {
+        const hashed = await bcrypt.hash(this._update.password, 10);
+        this._update.password = hashed;
+      }
+      next();
+    } catch (err) {
+      return next(err);
+    }
   });
 
   const User = model("User", userSchema)

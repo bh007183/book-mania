@@ -12,10 +12,8 @@ module.exports = {
 
     compare: (user, body) => {
         console.log(user)
-        console.log( body)
+        console.log(body)
         return bcrypt.compareSync(body.password, user.password)
-        
-
     },
 
     parseToken: async (req, res, next) => {

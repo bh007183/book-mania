@@ -48,8 +48,11 @@ export default function Dashboard() {
 
           </div>
           <div id="statsBox2">
+            {state.usercurrent ? <>
           <p>You Are Currently Reading:</p>
             <h3>{state.usercurrent.title}</h3>
+            </> : <p>Your Not Currently Reading Anything</p>}
+            
 
           </div>
 

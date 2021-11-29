@@ -14,7 +14,8 @@ const slice = createSlice({
         connection: [],
         readingList: [],
         recommended: [],
-        usercurrent: {}
+        usercurrent: {},
+        readingHistory: []
     },
     reducers: {
         setToken: (User, action) => {
@@ -34,12 +35,13 @@ const slice = createSlice({
             
             User.firstName = action.payload.firstName;
             User.lastName= action.payload.lastName;
-            user.email = action.payload.email
+            User.email = action.payload.email
             User.pendingconnection= action.payload.pendingconnection;
             User.connection= action.payload.connection;
             User.readingList= action.payload.readingList;
             User.recommended= action.payload.recommended
             User.usercurrent=action.payload.usercurrent
+            User.readingHistory = action.payload.readingHistory
         }
     }
 })
@@ -71,6 +73,17 @@ export const getUserApi = (data) => apiCallBegan({
         authorization: data.token,
     },
     method: "GET",
+    data,
+    onSuccess: setUser.type,
+    onError: error.type,
+
+})
+export const updateUserApi = (data) => apiCallBegan({
+    url: "http://localhost:8080/dashboard/user",
+    headers: {
+        authorization: data.token,
+    },
+    method: "PUT",
     data,
     onSuccess: setUser.type,
     onError: error.type,
