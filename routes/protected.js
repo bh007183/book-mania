@@ -81,7 +81,7 @@ router.post("/connect/response", parseToken, async (req, res) => {
     }
     
 
-    res.sendStatus(201);
+    res.status(200).json({_id: req.body.followId});
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -166,16 +166,22 @@ router.put("/user", parseToken, async (req, res) => {
 });
 
 
-router.get("/finduser", parseToken, async (req, res) => {
-  let firstName = req.body.name.split(" ")[0]
-  let lastName = req.body.name.split(" ")[1]
+router.get("/finduser/:name", parseToken, async (req, res) => {
+
+  
   try {
+    let firstName = req.params.name.split(" ")[0]
+  let lastName = req.params.name.split(" ")[1]
     let user = await User.find({
       "firstName": { $regex: new RegExp("^" + firstName, "i") },
       "lastName": { $regex: new RegExp("^" + lastName, "i") }
     
     });
-    
+
+    if(user.length < 1){
+      throw new Error("No matching results.")
+    }
+    console.log(user)
     res.status(200).json(user);
   } catch (err) {
     res.status(400).send(err.message);

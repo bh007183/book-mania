@@ -1,0 +1,67 @@
+#notificationContain{
+    background: url("../../images/Notification.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+}
+
+#connectionCard{
+   width: 80%;
+   height: 80%;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: rgba(245, 238, 194, 0.9);
+    border-radius: 10px;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+    
+}
+.requestComponent{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    height: 60px;
+    background-color: var(--lightgreen);
+    margin-top: 10px ;
+    width: 90%;
+    
+    
+}
+.noteNameColumn{
+    grid-column: 1/10;
+ 
+}
+.noteButtonColumn{
+    grid-column: 10/13;
+}
+
+.acceptConnectionButton{
+    width: 100%;
+    height: 50%;
+    background-color: var(--green);
+    border: none;
+}
+.rejectConnectionButton{
+    width: 100%;
+    height: 50%;
+    border: none;
+    background-color: red;
+}
+
+@media only screen and (max-width: 569px){
+    #connectionCard{
+        width: 90%;
+     }
+     .requestComponent{
+       
+        height: 70px;
+       
+        
+    }
+   
+
+}

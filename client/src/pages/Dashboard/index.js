@@ -23,7 +23,7 @@ SwiperCore.use([Pagination]);
 export default function Dashboard() {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.Store.User.Error);
-  let token = localStorage.getItem("Token") || null;
+
   useEffect(() => {
     dispatch(nytBestSellers())
     dispatch(getUserApi({ token: `bearer ${localStorage.getItem("Token")}` }));

@@ -14,3 +14,39 @@
 #viewConnections{
 
 }
+.resultComponent{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    height: 50px;
+    background-color: var(--lightgreen);
+    margin-top: 10px;
+}
+.nameColumn{
+    grid-column: 1/9;
+}
+.buttonColumn{
+    grid-column: 11/13;
+}
+#searchResultsGrandParent{
+    display: flex;
+    justify-content: center;
+
+}
+#searchResultsParent{
+    max-width: 400px;
+}
+.addUserButton{
+    width: 100%;
+    height: 100%;
+    background-color: var(--darkgreen);
+}
+@media only screen and (max-width: 400px){
+    .nameColumn{
+        grid-column: 1/9;
+    }
+    .buttonColumn{
+        grid-column: 10/13;
+    }
+   
+    
+}

@@ -15,7 +15,8 @@ const slice = createSlice({
         readingList: [],
         recommended: [],
         usercurrent: {},
-        readingHistory: []
+        readingHistory: [],
+        userSearch: []
     },
     reducers: {
         setToken: (User, action) => {
@@ -44,6 +45,15 @@ const slice = createSlice({
             User.Success = ""
 
         },
+        setSearch: (User, action) => {
+         User.userSearch = action.payload
+        },
+        resetSearch: (User, action) => {
+            User.userSearch = []
+        },
+        updatePendingConnection: (User, action) => {
+            User.pendingconnection = User.pendingconnection.filter(user => user._id !== action.payload._id)
+        },
         setUser: (User, action) => {
             
             User.firstName = action.payload.firstName;
@@ -60,7 +70,7 @@ const slice = createSlice({
 })
 
 
-export const { error, setToken,notLoggedIn, setUser, success, resetSuccess, resetError} = slice.actions
+export const { error, setToken,notLoggedIn, resetSearch,setUser,updatePendingConnection, success, resetSuccess, resetError, setSearch} = slice.actions
 
 export default slice.reducer
 
@@ -103,13 +113,35 @@ export const updateUserApi = (data) => apiCallBegan({
 
 })
 export const findUserApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/dashboard/finduser",
+    url: "http://localhost:8080/dashboard/finduser/" + data.name,
     headers: {
         authorization: data.token,
     },
     method: "GET",
+    onSuccess: setSearch.type,
+    onError: error.type,
+
+})
+
+export const addConnectionApi = (data) => apiCallBegan({
+    url: "http://localhost:8080/dashboard/connect/ask",
+    headers: {
+        authorization: data.token,
+    },
+    method: "POST",
     data,
     onSuccess: success.type,
+    onError: error.type,
+
+})
+export const responseConnectionApi = (data) => apiCallBegan({
+    url: "http://localhost:8080/dashboard/connect/response",
+    headers: {
+        authorization: data.token,
+    },
+    method: "POST",
+    data,
+    onSuccess: updatePendingConnection.type,
     onError: error.type,
 
 })

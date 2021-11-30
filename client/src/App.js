@@ -7,6 +7,7 @@ import {Provider} from "react-redux"
 import configureStore from "./state/configureStore"
 import Nav from "./components/nav"
 import ManageAccount from "./pages/ManageAccount"
+import Notifications from "./pages/Notifications"
 import ManageConnection from "./pages/Friends"
 import NoMatch from "./pages/NoMatch"
 
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/dashboard" element={<Dashboard protect={true}/>}/>
           <Route exact path="/manage-account" element={<ManageAccount/>}/>
           <Route exact path="/manage-connections" element={<ManageConnection/>}/>
+          <Route exact path="/notifications" element={<Notifications/>}/>
          
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/create-account" element={<Create/>}/>
