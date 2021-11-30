@@ -66,7 +66,7 @@ export default function Notifications() {
               </button>
             </div>
           </div>
-        )) : <h4>No notifications</h4>}
+        )) : <h3>No notifications</h3>}
       </div>
     </div>
   );
