@@ -54,6 +54,9 @@ const slice = createSlice({
         updatePendingConnection: (User, action) => {
             User.pendingconnection = User.pendingconnection.filter(user => user._id !== action.payload._id)
         },
+        updateConnection: (User, action) => {
+            User.connection = User.connection.filter(user => user._id !== action.payload._id)
+        },
         setUser: (User, action) => {
             
             User.firstName = action.payload.firstName;
@@ -70,7 +73,7 @@ const slice = createSlice({
 })
 
 
-export const { error, setToken,notLoggedIn, resetSearch,setUser,updatePendingConnection, success, resetSuccess, resetError, setSearch} = slice.actions
+export const { error, setToken,notLoggedIn, resetSearch, updateConnection, setUser,updatePendingConnection, success, resetSuccess, resetError, setSearch} = slice.actions
 
 export default slice.reducer
 
@@ -142,6 +145,17 @@ export const responseConnectionApi = (data) => apiCallBegan({
     method: "POST",
     data,
     onSuccess: updatePendingConnection.type,
+    onError: error.type,
+
+})
+export const removeConnectionAPI = (data) => apiCallBegan({
+    url: "http://localhost:8080/dashboard/remove/connection",
+    headers: {
+        authorization: data.token,
+    },
+    method: "PUT",
+    data,
+    onSuccess: updateConnection.type,
     onError: error.type,
 
 })

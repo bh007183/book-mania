@@ -188,6 +188,21 @@ router.get("/finduser/:name", parseToken, async (req, res) => {
   }
 });
 
+router.put("/remove/connection", parseToken, async (req, res) => {
+  try {
+    let user = await User.findByIdAndUpdate(res.locals._id, {
+      $pull: {connection: req.body.followId}
+
+    }, {new: true})
+    
+
+   res.status(200).json({_id:req.body.followId})
+  } catch (err) {
+    console.log(err)
+    res.status(400).send(err.message);
+  }
+});
+
 
 
 module.exports = router;
