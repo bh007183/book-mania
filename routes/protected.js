@@ -32,25 +32,10 @@ router.get("/readinglist", parseToken, async (req, res) => {
   }
 });
 
-router.get("/friends", parseToken, async (req, res) => {
-  console.log("this route");
-  console.log(res.locals);
-  try {
-    let user = await User.findById(res.locals._id)
-      .select(["-password"])
-      .populate({
-        path: "connection",
-        populate: { path: "readingList" },
-        populate: { path: "usercurrent" },
-      });
 
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(400).send(err.message);
-  }
-});
+// User is requesting to connect to other user
 
-router.post("/connect/ask", parseToken, async (req, res) => {
+router.put("/connect/ask", parseToken, async (req, res) => {
   try {
     let user = await User.findByIdAndUpdate(req.body.followId, {
       $addToSet: { pendingconnection: res.locals._id },
@@ -61,8 +46,11 @@ router.post("/connect/ask", parseToken, async (req, res) => {
     res.status(400).send(err.message);
   }
 });
-router.post("/connect/response", parseToken, async (req, res) => {
+
+// User responds to request with either true or false
+router.put("/connect/response", parseToken, async (req, res) => {
   try {
+    //if accept === true
     if(req.body.accept){
       let user = await User.findByIdAndUpdate(res.locals._id, {
         $addToSet: { connection: req.body.followId },
@@ -74,6 +62,7 @@ router.post("/connect/response", parseToken, async (req, res) => {
   
       },{new: true});
     }else{
+      //if accept === false
       let user = await User.findByIdAndUpdate(res.locals._id, {
         $pull: {pendingconnection: req.body.followId}
       }
@@ -119,7 +108,7 @@ router.post("/recommend", parseToken, async (req, res) => {
   }
 });
 
-router.post("/currentreading", parseToken, async (req, res) => {
+router.put("/currentreading", parseToken, async (req, res) => {
   try {
     let user = await User.findByIdAndUpdate(res.locals._id, {
       usercurrent: req.body
@@ -132,7 +121,7 @@ router.post("/currentreading", parseToken, async (req, res) => {
 });
 
 
-router.post("/readinglist", parseToken, async (req, res) => {
+router.put("/readinglist", parseToken, async (req, res) => {
   try {
     let user = await User.findByIdAndUpdate(res.locals._id, {
       readinglist: req.body

@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import swal from 'sweetalert';
 import jwt_decode from "jwt-decode";
+import {notLoggedIn} from "../state/user-slice"
 import {useDispatch, useSelector} from "react-redux"
 
 const handleFormInput = (event, state, setState) => {
@@ -14,6 +15,7 @@ const handleFormInput = (event, state, setState) => {
 };
 
 const authenticated = () => {
+
   let token = localStorage.getItem("Token") || null;
   let currentTime = Date.now()
   
@@ -28,6 +30,7 @@ const authenticated = () => {
           icon: "warning",
           dangerMode: false,
         })
+     notLoggedIn()
       return false;
     } else {
       return true;
@@ -40,6 +43,7 @@ const authenticated = () => {
         icon: "warning",
         dangerMode: false,
       })
+      notLoggedIn()
     return false;
   }
 

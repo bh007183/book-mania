@@ -4,8 +4,8 @@ const protectedRoutes = require("./protected")
 const postUser = require("./user-routes.js")
 
 
-router.use("/api", postUser)
-router.use("/dashboard", parseToken, protectedRoutes)
+router.use("/public/api", postUser)
+router.use("/protected/api", parseToken, protectedRoutes)
 router.use((req, res)=> {
     res.status(500).send("No matching routes")
 })

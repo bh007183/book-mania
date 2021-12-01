@@ -6,6 +6,7 @@ const slice = createSlice({
     initialState: {
         UserId: "",
         Error: "",
+        loggedIn: '',
         Success: "",
         firstName : "",
         lastName: "",
@@ -24,9 +25,7 @@ const slice = createSlice({
             User.UserId = action.payload._id
             User.loggedIn = true
         },
-        notLoggedIn: (User, action) => {
-            User.loggedIn = false
-        },
+     
         
         error: (User, action) => {
             console.log(action)
@@ -68,6 +67,25 @@ const slice = createSlice({
             User.recommended= action.payload.recommended
             User.usercurrent=action.payload.usercurrent
             User.readingHistory = action.payload.readingHistory
+            User.loggedIn = true
+        },
+        notLoggedIn: (User, action) => {
+            User = {
+                UserId: "",
+                Error: "",
+                loggedIn: '',
+                Success: "",
+                firstName : "",
+                lastName: "",
+                email: "",
+                pendingconnection: [],
+                connection: [],
+                readingList: [],
+                recommended: [],
+                usercurrent: {},
+                readingHistory: [],
+                userSearch: []
+            }
         }
     }
 })
@@ -78,7 +96,7 @@ export const { error, setToken,notLoggedIn, resetSearch, updateConnection, setUs
 export default slice.reducer
 
 export const createUserApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/api/user",
+    url: "http://localhost:8080/public/api/user",
     method: "POST",
     data,
     onSuccess: setToken.type,
@@ -86,7 +104,7 @@ export const createUserApi = (data) => apiCallBegan({
 
 })
 export const loginUserApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/api/login",
+    url: "http://localhost:8080/public/api/login",
     method: "POST",
     data,
     onSuccess: setToken.type,
@@ -94,7 +112,7 @@ export const loginUserApi = (data) => apiCallBegan({
 
 })
 export const getUserApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/dashboard",
+    url: "http://localhost:8080/protected/api",
     headers: {
         authorization: data.token,
     },
@@ -105,7 +123,7 @@ export const getUserApi = (data) => apiCallBegan({
 
 })
 export const updateUserApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/dashboard/user",
+    url: "http://localhost:8080/protected/api/user",
     headers: {
         authorization: data.token,
     },
@@ -116,7 +134,7 @@ export const updateUserApi = (data) => apiCallBegan({
 
 })
 export const findUserApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/dashboard/finduser/" + data.name,
+    url: "http://localhost:8080/protected/api/finduser/" + data.name,
     headers: {
         authorization: data.token,
     },
@@ -127,29 +145,29 @@ export const findUserApi = (data) => apiCallBegan({
 })
 
 export const addConnectionApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/dashboard/connect/ask",
+    url: "http://localhost:8080/protected/api/connect/ask",
     headers: {
         authorization: data.token,
     },
-    method: "POST",
+    method: "PUT",
     data,
     onSuccess: success.type,
     onError: error.type,
 
 })
 export const responseConnectionApi = (data) => apiCallBegan({
-    url: "http://localhost:8080/dashboard/connect/response",
+    url: "http://localhost:8080/protected/api/connect/response",
     headers: {
         authorization: data.token,
     },
-    method: "POST",
+    method: "PUT",
     data,
     onSuccess: updatePendingConnection.type,
     onError: error.type,
 
 })
 export const removeConnectionAPI = (data) => apiCallBegan({
-    url: "http://localhost:8080/dashboard/remove/connection",
+    url: "http://localhost:8080/protected/api/remove/connection",
     headers: {
         authorization: data.token,
     },

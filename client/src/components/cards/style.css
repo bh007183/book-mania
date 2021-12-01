@@ -6,6 +6,10 @@
     height: 100%;
     background-color: var(--light);
     border-radius:10px ;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    
   }
   .cardDescript{
     overflow-wrap: break-word;
@@ -13,19 +17,33 @@
     
     /* white-space: nowrap; */
     text-overflow: ellipsis;
-    padding: 10px;
+    margin: 10px;
   }
   
   .cardContent{
     width: 70%;
+  
   }
   .cardImage{
     contain: content;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     width: 30%;
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .cardImage > img{
     width: 100%;
+    border-radius: 10px;
+  }
+  @media only sceen and (max-width: 700px){
+    .Card{
+        
+        padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+       
+        
+      }
   }

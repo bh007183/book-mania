@@ -4,15 +4,19 @@ import {apiCallBegan} from "./actions"
 const slice = createSlice({
     name: 'Book',
     initialState: {
-        nytBestSellers: []
+        nytBestSellers: [],
+        classics: []
     },
     reducers: {
         setBooks: (Book, action) => {
              Book = action.payload
         },
-        consoleBooks: (Book, action) => {
-            console.log(action.payload)
+        setNYBooks: (Book, action) => {
             Book.nytBestSellers = action.payload.results.books
+        },
+        setClassics: (Book, action) => {
+            console.log(action.payload)
+
         },
         error: (Book, action) => {
             Book.error = action.response
@@ -21,7 +25,7 @@ const slice = createSlice({
 })
 
 
-export const {setBooks, error, consoleBooks} = slice.actions
+export const {setBooks, error, setClassics,setNYBooks} = slice.actions
 
 export default slice.reducer
 
@@ -33,7 +37,13 @@ export const getBooks = (book) => apiCallBegan({
 })
 export const nytBestSellers = () => apiCallBegan({
     url: `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=` + process.env.REACT_APP_NYT,
-    onSuccess: consoleBooks.type,
+    onSuccess: setNYBooks.type,
+    onError: error.type,
+
+})
+export const olClassics = () => apiCallBegan({
+    url: `https://openlibrary.org/subjects/classic_literature.json`,
+    onSuccess: setClassics.type,
     onError: error.type,
 
 })

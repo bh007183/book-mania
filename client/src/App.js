@@ -10,6 +10,7 @@ import ManageAccount from "./pages/ManageAccount"
 import Notifications from "./pages/Notifications"
 import ManageConnection from "./pages/Friends"
 import NoMatch from "./pages/NoMatch"
+import Browse from "./pages/Browse"
 
 import React, { useEffect } from "react";
 import {
@@ -31,7 +32,7 @@ function App() {
           <Route exact path="/manage-account" element={<ManageAccount/>}/>
           <Route exact path="/manage-connections" element={<ManageConnection/>}/>
           <Route exact path="/notifications" element={<Notifications/>}/>
-         
+         <Route exact path="/browse" element={<Browse/>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/create-account" element={<Create/>}/>
           <Route path="*" element={<NoMatch/>} />

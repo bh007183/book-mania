@@ -53,7 +53,6 @@ export default function ManageConnection() {
   };
 
   const addConnection = (event) => {
-    console.log(event.target.value);
     dispatch(
       addConnectionApi({
         token: `bearer ${localStorage.getItem("Token")}`,
