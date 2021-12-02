@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../Models");
 const { signToken, compare, parseToken } = require("../utils/auth");
+const axios = require("axios")
 router.post("/user", async (req, res) => {
   try {
   
@@ -26,6 +27,25 @@ router.post("/login", async (req, res) => {
     res.status(400).send(err.message);
   }
 });
+
+router.get("/browse", async (req, res) => {
+try{
+  let nytBestSellers = await axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=` + process.env.REACT_APP_NYT)
+  let classics = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:%22classic+literature%22&tbs=,bkt:b&maxResults=30`)
+  
+  res.status(200).json({nytBestSellers: nytBestSellers.data.results.books, classics: classics.data.items})
+}catch(err){
+  console.log(err.message)
+  res.status(400).send(err.message);
+}
+
+ 
+
+
+
+
+
+})
 
 
 

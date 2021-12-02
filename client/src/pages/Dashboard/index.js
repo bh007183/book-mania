@@ -132,7 +132,7 @@ export default function Dashboard() {
         </Swiper>
       </div>
 
-      {/* <Caraselle header="Your Reading List" background="var(--darkgreen)" /> */}
+
     </div>
   );
 }
