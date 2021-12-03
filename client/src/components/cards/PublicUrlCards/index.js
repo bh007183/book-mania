@@ -1,27 +1,32 @@
 import React from "react";
 import "../style.css";
+import { Link } from "react-router-dom";
 export default function PublicUrlCards(props) {
+
+  let url = `/browse/${props.book.primary_isbn13}/${props.category}`;
   return (
+    <Link style={{ textDecoration: "none", color: "black" }} to={url}>
     <div className="Card">
       
 
       <div className="cardContent">
       <p style={{ textAlign: "center", width: "100%", margin: "5px" }}>
-        {props.bestSeller.contributor}
+        {props.book.contributor}
       </p>
       <h4 style={{ textAlign: "center", width: "100%", margin: "5px" }}>
-        {props.bestSeller.title}
+        {props.book.title}
       </h4>
         
           <span className="cardDescript centerAlign">
-            {props.bestSeller.description.substring(0, 150)}
+            {props.book.description.substring(0, 150)}
           </span>
      
         <br></br>
       </div>
       <div className="cardImage">
-        <img src={props.bestSeller.book_image}></img>
+        <img src={props.book.book_image}></img>
       </div>
     </div>
+    </Link>
   );
 }

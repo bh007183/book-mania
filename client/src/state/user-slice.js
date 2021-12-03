@@ -17,13 +17,14 @@ const slice = createSlice({
         recommended: [],
         usercurrent: {},
         readingHistory: [],
-        userSearch: []
+        userSearch: [],
+        view: {}
     },
     reducers: {
         setToken: (User, action) => {
             localStorage.setItem("Token", action.payload.token)
-            User.UserId = action.payload._id
-            User.loggedIn = true
+            // User.UserId = action.payload._id
+            window.location.replace("/dashboard") 
         },
      
         
@@ -60,7 +61,7 @@ const slice = createSlice({
             
             User.firstName = action.payload.firstName;
             User.lastName= action.payload.lastName;
-            User.email = action.payload.email
+            User.email = action.payload.email;
             User.pendingconnection= action.payload.pendingconnection;
             User.connection= action.payload.connection;
             User.readingList= action.payload.readingList;
@@ -70,28 +71,29 @@ const slice = createSlice({
             User.loggedIn = true
         },
         notLoggedIn: (User, action) => {
-            User = {
-                UserId: "",
-                Error: "",
-                loggedIn: '',
-                Success: "",
-                firstName : "",
-                lastName: "",
-                email: "",
-                pendingconnection: [],
-                connection: [],
-                readingList: [],
-                recommended: [],
-                usercurrent: {},
-                readingHistory: [],
-                userSearch: []
-            }
+            User.firstName = "";
+            User.lastName= "";
+            User.email = ""
+            User.pendingconnection = "";
+            User.connection = "";
+            User.readingList = "";
+            User.recommended = "";
+            User.usercurrent = "";
+            User.readingHistory = ""
+            User.loggedIn = ""
+        },
+        setUView: (User, action) => {
+            console.log(action.payload)
+            console.log(User.recommended)
+            let book = User.recommended.filter(book => book._id === action.payload.id)[0]
+            console.log(book)
+
         }
     }
 })
 
 
-export const { error, setToken,notLoggedIn, resetSearch, updateConnection, setUser,updatePendingConnection, success, resetSuccess, resetError, setSearch} = slice.actions
+export const { error,setUView, setToken,notLoggedIn, resetSearch, updateConnection, setUser,updatePendingConnection, success, resetSuccess, resetError, setSearch} = slice.actions
 
 export default slice.reducer
 
@@ -174,6 +176,41 @@ export const removeConnectionAPI = (data) => apiCallBegan({
     method: "PUT",
     data,
     onSuccess: updateConnection.type,
+    onError: error.type,
+
+})
+
+export const addCurrentReading = (data) => apiCallBegan({
+    url: "http://localhost:8080/protected/api/currentreading",
+    headers: {
+        authorization: data.token,
+    },
+    method: "PUT",
+    data,
+    onSuccess: success.type,
+    onError: error.type,
+
+})
+export const addreadingList = (data) => apiCallBegan({
+    url: "http://localhost:8080/protected/api/readinglist",
+    headers: {
+        authorization: data.token,
+    },
+    method: "PUT",
+    data,
+    onSuccess: success.type,
+    onError: error.type,
+
+})
+
+export const addRecommendation = (data) => apiCallBegan({
+    url: "http://localhost:8080/protected/api/recommend",
+    headers: {
+        authorization: data.token,
+    },
+    method: "PUT",
+    data,
+    onSuccess: success.type,
     onError: error.type,
 
 })

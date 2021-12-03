@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {handleFormInput} from "../../utils"
 import {useDispatch, useSelector} from "react-redux"
-import {loginUserApi} from "../../state/user-slice"
+import {loginUserApi, resetSuccess} from "../../state/user-slice"
 import {  Navigate, Link } from 'react-router-dom'
 import "./style.css"
 
@@ -19,11 +19,11 @@ export default function Login() {
        event.preventDefault()
        dispatch(loginUserApi(login))
    }
-if(user.loggedIn){
-    console.log(user)
-    let route = `/dashboard`
-    return <Navigate to={route} />;
-}
+// if(user.success){
+//     console.log(user)
+//     let route = `/dashboard`
+//     return <Navigate to={route} />;
+// }
     return (
         <div className="entryContain" >
            

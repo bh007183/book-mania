@@ -54,7 +54,7 @@ export default function Browse() {
           breakpoints= {{
            
             // when window width is >= 480px
-            600: {
+            700: {
               slidesPerView: 2,
               spaceBetween: 30
             },
@@ -68,7 +68,7 @@ export default function Browse() {
         >
           {bookState.nytBestSellers.map((book) => (
             <SwiperSlide key={uniqid()}>
-              <PublicUrlCards  bestSeller={book} />
+              <PublicUrlCards category="nytBestSellers" book={book} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -89,14 +89,14 @@ export default function Browse() {
             
              // when window width is >= 480px
              700: {
-               slidesPerView: 2,
-               spaceBetween: 30
-             },
-             // when window width is >= 640px
-             1000: {
-               slidesPerView: 3,
-               spaceBetween: 40
-             }
+              slidesPerView: 2,
+              spaceBetween: 30
+            },
+            // when window width is >= 640px
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 40
+            }
            }}
            className="mySwiper"
         >
@@ -123,14 +123,14 @@ export default function Browse() {
             
              // when window width is >= 480px
              700: {
-               slidesPerView: 2,
-               spaceBetween: 30
-             },
-             // when window width is >= 640px
-             1000: {
-               slidesPerView: 3,
-               spaceBetween: 40
-             }
+              slidesPerView: 2,
+              spaceBetween: 30
+            },
+            // when window width is >= 640px
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 40
+            }
            }}
            className="mySwiper"
         >

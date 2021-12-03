@@ -88,7 +88,7 @@ export default function Dashboard() {
         >
           {state.recommended.map((book) => (
             <SwiperSlide>
-              <RecommendCards recommended={book} />
+              <RecommendCards book={book} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {handleFormInput} from "../../utils"
 import "./style.css"
-import {createUserApi} from "../../state/user-slice"
+import {createUserApi, resetSuccess} from "../../state/user-slice"
 import {  Navigate, Link } from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux"
 export default function Create() {
@@ -13,16 +13,18 @@ export default function Create() {
     })
 const dispatch = useDispatch()
 const user = useSelector(state =>  state.Store.User)
+
+
 const handleCreate = (event) => {
     event.preventDefault()
     dispatch(createUserApi(create))
 }
 
-if(user.loggedIn){
-    console.log(user)
-    let route = `/dashboard`
-    return <Navigate to={route} />;
-}
+// if(user.success){
+//     console.log(user)
+//     let route = `/dashboard`
+//     return <Navigate to={route} />;
+// }
     
         return (
             <div className="entryContain" >

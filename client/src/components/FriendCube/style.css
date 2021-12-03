@@ -1,0 +1,9 @@
+.friendCube{
+    width: 220px;
+    min-height: 220px;
+    background-color: var(--lightgreen);
+    ;
+    margin: 10px;
+    border-radius: 10px;
+    border: none
+}

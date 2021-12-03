@@ -76,7 +76,7 @@ router.put("/connect/response", parseToken, async (req, res) => {
   }
 });
 
-router.post("/recommend", parseToken, async (req, res) => {
+router.put("/recommend", parseToken, async (req, res) => {
   try {
     // Finds if User exists and if is following individual
     let sender = await User.findById(res.locals._id, {
@@ -98,6 +98,7 @@ router.post("/recommend", parseToken, async (req, res) => {
           description: req.body.description,
           thumbnail: req.body.thumbnail,
           recommended: mongoose.Types.ObjectId(res.locals._id),
+          externalLink: req.body.externalLink
         },
       },
     },{new: true});
@@ -110,8 +111,13 @@ router.post("/recommend", parseToken, async (req, res) => {
 
 router.put("/currentreading", parseToken, async (req, res) => {
   try {
-    let user = await User.findByIdAndUpdate(res.locals._id, {
-      usercurrent: req.body
+    
+
+
+
+    await User.findByIdAndUpdate(res.locals._id, {
+      usercurrent: req.body.book,
+      $pull: {readingList: req.body.book}
 
     },{new: true});
     res.sendStatus(201);
@@ -124,9 +130,10 @@ router.put("/currentreading", parseToken, async (req, res) => {
 router.put("/readinglist", parseToken, async (req, res) => {
   try {
     let user = await User.findByIdAndUpdate(res.locals._id, {
-      readinglist: req.body
+      $push: {readingList: req.body.book}
 
     },{new: true});
+    console.log(user)
     res.sendStatus(201);
   } catch (err) {
     res.status(400).send(err.message);

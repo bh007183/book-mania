@@ -21,6 +21,8 @@ import InfoIcon from "@material-ui/icons/Info";
 import { Hidden } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
+import {notLoggedIn} from "../../state/user-slice"
+import {useDispatch} from "react-redux"
 
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -99,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Nav() {
+  const dispatch = useDispatch()
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -173,6 +176,18 @@ export default function Nav() {
                       style={{ color: "black", textDecoration: "none", width: "100%", height: "100%"}}
                     >
                       Connect
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                    onClick={() => {
+                      dispatch(notLoggedIn())
+                      localStorage.clear()
+                    }}
+                      to="/login"
+                      style={{ color: "black", textDecoration: "none", width: "100%", height: "100%"}}
+                    >
+                      Log Out
                     </Link>
                   </MenuItem>
                 </Select>

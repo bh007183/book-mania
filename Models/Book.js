@@ -21,6 +21,10 @@ const bookSchema = new Schema({
 
     recommended: {
       type: Schema.Types.ObjectId, ref: 'User' 
+    },
+
+    externalLink: {
+        type: String
     }
 
 })
