@@ -12,6 +12,7 @@ import ManageConnection from "./pages/Friends"
 import NoMatch from "./pages/NoMatch"
 import Browse from "./pages/Browse"
 
+
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -19,6 +20,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ViewBook from './pages/ViewBook';
 
 function App() {
   const store = configureStore()
@@ -35,6 +37,7 @@ function App() {
          <Route exact path="/browse" element={<Browse/>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/create-account" element={<Create/>}/>
+          <Route path="/browse/:id/:category" element={<ViewBook/>}/>
           <Route path="*" element={<NoMatch/>} />
         </Routes>
       </Router>

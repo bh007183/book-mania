@@ -102,7 +102,7 @@ export default function Browse() {
         >
            {bookState.classics.map((book, index) => (
                 <SwiperSlide key={uniqid()}>
-                  <GoogleBook  book={book} />
+                  <GoogleBook  category="classics" book={book} />
                 </SwiperSlide>
               ))}
         </Swiper>

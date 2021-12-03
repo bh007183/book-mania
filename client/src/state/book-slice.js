@@ -5,7 +5,8 @@ const slice = createSlice({
     name: 'Book',
     initialState: {
         nytBestSellers: [],
-        classics: []
+        classics: [],
+        view: {}
     },
     reducers: {
         setBooks: (Book, action) => {
@@ -16,6 +17,11 @@ const slice = createSlice({
             Book.nytBestSellers = action.payload.nytBestSellers
             Book.classics = action.payload.classics
         },
+
+        setView: (Book, action) => {
+            Book.view = Book[action.payload.category].filter(book => book.id === action.payload.id)[0]
+        },
+
        
         error: (Book, action) => {
             Book.error = action.response
@@ -24,7 +30,7 @@ const slice = createSlice({
 })
 
 
-export const {setBooks, error, setBrowse} = slice.actions
+export const {setBooks, error, setBrowse, setView} = slice.actions
 
 export default slice.reducer
 
