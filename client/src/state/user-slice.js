@@ -33,12 +33,16 @@ const slice = createSlice({
             User.Error = action.payload
         },
         success: (User, action) => {
-            User.Success = true
+            if(action.payload.message){
+                User.Success = action.payload.message
+            }else{
+                User.Success = true
+            }
+            
 
         },
 
         resetError: (User, action) => {
-            console.log(action)
             User.Error = ""
         },
         resetSuccess: (User, action) => {
@@ -86,7 +90,7 @@ const slice = createSlice({
             console.log(action.payload)
             console.log(User.recommended)
             let book = User.recommended.filter(book => book._id === action.payload.id)[0]
-            console.log(book)
+            User.view = book
 
         }
     }

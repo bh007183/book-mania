@@ -4,6 +4,8 @@ import {apiCallBegan} from "./actions"
 const slice = createSlice({
     name: 'Book',
     initialState: {
+        success: '',
+        error: '',
         nytBestSellers: [],
         classics: [],
         view: {}
@@ -17,14 +19,27 @@ const slice = createSlice({
             Book.nytBestSellers = action.payload.nytBestSellers
             Book.classics = action.payload.classics
         },
+        success: (Book) => {
+             Book.success = true
+        },
+        error: (Book, action) => {
+            Book.error = action.response
+        },
+         resetErrorSuccess: (Book, action) => {
+            Book.error = ""
+            Book.Success = ""
+        },
+        
+
 
         setView: (Book, action) => {
             
-            let uniqeObj = Book[action.payload.category].filter(book => book.id || book.primary_isbn13 === action.payload.id)[0]
+            let uniqeObj;
             let standardObj;
-
+            console.log(uniqeObj)
             //If Book data came from NYT API
             if(action.payload.category === "nytBestSellers"){
+                uniqeObj = Book[action.payload.category].filter(book =>  book.primary_isbn13 === action.payload.id)[0]
                 standardObj = {
                     title: uniqeObj.title,
                     author: uniqeObj.author,
@@ -35,6 +50,7 @@ const slice = createSlice({
                 }
             }else{
                 //If Book data came from google API
+                uniqeObj = Book[action.payload.category].filter(book => book.id  === action.payload.id)[0]
                 let title = uniqeObj.volumeInfo.title;
                 let authors;
                 let description;
@@ -75,14 +91,12 @@ const slice = createSlice({
         },
 
        
-        error: (Book, action) => {
-            Book.error = action.response
-        }
+       
     }
 })
 
 
-export const {setBooks, error, setBrowse, setView} = slice.actions
+export const {setBooks,success, resetErrorSuccess,  error, setBrowse, setView} = slice.actions
 
 export default slice.reducer
 

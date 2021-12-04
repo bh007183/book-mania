@@ -4,7 +4,7 @@ import "../style.css";
 
 export default function RecommendCards(props) {
   console.log(props)
-  let url = `/browse/${props.book._id}/recommended`;
+  let url = `/browse/viewLink/${props.book._id}/recommended`;
   return (
     <Link style={{ textDecoration: "none", color: "black" }} to={url}>
     <div className="Card">

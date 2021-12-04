@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { setView, resetErrorSuccess } from "../../state/book-slice";
+import { setView } from "../../state/book-slice";
 import { useDispatch, useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -8,30 +8,33 @@ import { authenticated } from "../../utils";
 import { Navigate } from "react-router-dom";
 import FriendCube from "../../components/FriendCube"
 import "./style.css";
-import {notLoggedIn} from "../../state/user-slice";
+import {
+  notLoggedIn,
+
+} from "../../state/user-slice";
 
 import Modal from "@mui/material/Modal";
 
-export default function ViewBook() {
+export default function ViewUserLinkBook() {
   const dispatch = useDispatch();
 
-  let view = useSelector((state) => state.Store.Book.view)
-  // let success = useSelector((state) => state.Store.Book.success)
-  // let error = useSelector(state => state.Store.Book.error)
+  let view = useSelector((state) => state.Store.User.view)
   
-  let friendList = useSelector((state) => state.Store.User.connection)
 
+  let friendList = useSelector((state) => state.Store.User.connection)
   useEffect(() => {
-     dispatch(resetErrorSuccess())
     let data = window.location.pathname.split("/");
+    
       let obj = {
-        category: data[3],
-        id: data[2],
+        category: data[4],
+        id: data[3],
       };
-      dispatch(setView(obj));
-   
+      dispatch(setUView(obj));
+    
     
   }, []);
+
+  console.log()
 
   const [open, setOpen] = React.useState(false);
   // Handle Model Open Close
@@ -124,7 +127,7 @@ export default function ViewBook() {
       <Modal open={open} id="friendModal">
         {/* <Box> */}
           <Grid container spacing={2}>
-            
+           
             <Grid item xs={12}>
 
               {friendList.map(friend => <FriendCube _id={friend._id}  firstName={friend.firstName} lastName={friend.lastName}/>)}

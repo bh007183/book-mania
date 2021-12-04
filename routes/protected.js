@@ -103,7 +103,7 @@ router.put("/recommend", parseToken, async (req, res) => {
       },
     },{new: true});
 
-    res.sendStatus(201);
+    res.status(200).json({message: req.body.friendId});
   } catch (err) {
     res.status(400).send(err.message);
   }

@@ -21,6 +21,7 @@ import {
   Link
 } from "react-router-dom";
 import ViewBook from './pages/ViewBook';
+import ViewUserLinkBook from './pages/ViewUserLinkBook';
 
 function App() {
   const store = configureStore()
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/create-account" element={<Create/>}/>
           <Route path="/browse/:id/:category" element={<ViewBook/>}/>
+          <Route path="/browse/viewLink/:id/:category" element={<ViewUserLinkBook/>}/>
           <Route path="*" element={<NoMatch/>} />
         </Routes>
       </Router>
