@@ -218,3 +218,16 @@ export const addRecommendation = (data) => apiCallBegan({
     onError: error.type,
 
 })
+
+
+export const removeRecommendedBook = (data) => apiCallBegan({
+    url: "http://localhost:8080/protected/api/remove-recommend",
+    headers: {
+        authorization: data.token,
+    },
+    method: "PUT",
+    data,
+    onSuccess: success.type,
+    onError: error.type,
+
+})

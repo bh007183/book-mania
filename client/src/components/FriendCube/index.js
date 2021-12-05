@@ -15,6 +15,9 @@ export default function FriendCube(props) {
     if(success === friendRef.current.value){
       friendRef.current.disabled = true
       friendRef.current.style.backgroundColor = "blue"
+      friendRef.current.innerHTML = `<span style="color: white" >
+      Recommendation Sent!
+    </span>`
 
       dispatch(resetSuccess)
     }

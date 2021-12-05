@@ -3,9 +3,10 @@ import { setView } from "../../state/book-slice";
 import { useDispatch, useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { addCurrentReading, addreadingList,  setUView } from "../../state/user-slice";
+import { addCurrentReading, addreadingList,  setUView , removeRecommendedBook} from "../../state/user-slice";
 import { authenticated } from "../../utils";
 import { Navigate } from "react-router-dom";
+import Box from "@mui/material/Box";
 import FriendCube from "../../components/FriendCube"
 import "./style.css";
 import {
@@ -34,7 +35,7 @@ export default function ViewUserLinkBook() {
     
   }, []);
 
-  console.log()
+
 
   const [open, setOpen] = React.useState(false);
   // Handle Model Open Close
@@ -64,6 +65,15 @@ export default function ViewUserLinkBook() {
       })
     );
   };
+
+  const handleRemoveFromRecommended = () => {
+    dispatch(
+      removeRecommendedBook({
+        token: `bearer ${localStorage.getItem("Token")}`,
+        book: view,
+      })
+    );
+  }
 
   return (
     <>
@@ -121,20 +131,34 @@ export default function ViewUserLinkBook() {
                 </Button>
               </a>
             </Grid>
+            <Grid className="centerAlign" xs={12} item>
+             
+                <Button onClick={handleRemoveFromRecommended} style={{ width: "250px" }} variant="contained">
+                  Remove
+                </Button>
+            
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Modal open={open} id="friendModal">
-        {/* <Box> */}
-          <Grid container spacing={2}>
-           
-            <Grid item xs={12}>
+      <Modal  open={open} id="friendModal">
+        <>
+      <div item xs={12} className="centerAlign">
+            <Button onClick={handleClose} variant="contained" style={{marginTop: "10px"}}>Close</Button>
+          </div>
+        <Box style={{overflowY: "scroll", height: "90%"}}>
+      
+          <Grid  container  spacing={2}>
+            
+            <Grid item  className="flexBox" xs={12}>
 
               {friendList.map(friend => <FriendCube _id={friend._id}  firstName={friend.firstName} lastName={friend.lastName}/>)}
 
             </Grid>
+           
           </Grid>
-        {/* </Box> */}
+          </Box>
+     </>
       </Modal>
     </>
   );

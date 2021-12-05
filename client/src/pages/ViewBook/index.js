@@ -3,6 +3,7 @@ import { setView, resetErrorSuccess } from "../../state/book-slice";
 import { useDispatch, useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import { addCurrentReading, addreadingList,  setUView } from "../../state/user-slice";
 import { authenticated } from "../../utils";
 import { Navigate } from "react-router-dom";
@@ -121,17 +122,24 @@ export default function ViewBook() {
           </Grid>
         </Grid>
       </Grid>
-      <Modal open={open} id="friendModal">
-        {/* <Box> */}
-          <Grid container spacing={2}>
+      <Modal  open={open} id="friendModal">
+        <>
+      <div item xs={12} className="centerAlign">
+            <Button onClick={handleClose} variant="contained" style={{marginTop: "10px"}}>Close</Button>
+          </div>
+        <Box style={{overflowY: "scroll", height: "90%"}}>
+      
+          <Grid  container  spacing={2}>
             
-            <Grid item xs={12}>
+            <Grid item  className="flexBox" xs={12}>
 
               {friendList.map(friend => <FriendCube _id={friend._id}  firstName={friend.firstName} lastName={friend.lastName}/>)}
 
             </Grid>
+           
           </Grid>
-        {/* </Box> */}
+          </Box>
+     </>
       </Modal>
     </>
   );

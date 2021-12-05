@@ -8,6 +8,14 @@ img{
     transform: translate(-50%, -50%);
     width: 80%;
     height: 80%;
+    contain: content;
     border-radius: 10px;
-    overflow-y: scroll;
+    
+   
+}
+
+.flexBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
