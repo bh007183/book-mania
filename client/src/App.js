@@ -12,7 +12,7 @@ import ManageConnection from "./pages/Friends"
 import NoMatch from "./pages/NoMatch"
 import Browse from "./pages/Browse"
 
-
+import BottomNavigation from '@mui/material/BottomNavigation';
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -35,13 +35,16 @@ function App() {
           <Route exact path="/manage-account" element={<ManageAccount/>}/>
           <Route exact path="/manage-connections" element={<ManageConnection/>}/>
           <Route exact path="/notifications" element={<Notifications/>}/>
-         <Route exact path="/browse" element={<Browse/>}/>
+         <Route path="/browse/*" element={<Browse/>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/create-account" element={<Create/>}/>
-          <Route path="/browse/:id/:category" element={<ViewBook/>}/>
-          <Route path="/browse/viewLink/:id/:category" element={<ViewUserLinkBook/>}/>
+
           <Route path="*" element={<NoMatch/>} />
         </Routes>
+        <BottomNavigation className="alignCenter" style={{backgroundColor: "var(--blue)", height: "50px"}}>
+          <p><a href="https://github.com/bh007183/book-mania" target="_blank" style={{color: "white"}}>Book-Mania Code Base</a></p>
+                          
+        </BottomNavigation>
       </Router>
     
     </Provider>

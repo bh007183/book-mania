@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react.js";
 import { getBrowse } from "../../state/book-slice";
-import PublicUrlCards from "../../components/cards/PublicUrlCards";
+import BrowseComponent from "../../components/Browse";
+import Search from "../../components/search";
+import {Route, Routes, Link} from "react-router-dom"
+import ViewBook from '../../pages/ViewBook';
+import ViewUserLinkBook from '../../pages/ViewUserLinkBook';
 import uniqid from "uniqid";
 import {
   notLoggedIn,
@@ -14,6 +18,8 @@ import {
   resetSearch,
   removeConnectionAPI,
 } from "../../state/user-slice";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import { Navigate } from "react-router-dom";
 import { authenticated, handleFormInput } from "../../utils";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -21,87 +27,49 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "./style.css";
 export default function Browse() {
   const dispatch = useDispatch();
+  const [value, setValue] = React.useState(0);
 
+  const handleChange = (event) => {
+    if(value === 0) {
+      setValue(1)
+    }else{
+      setValue(0)
+    }
+   
+  };
   useEffect(() => {
     dispatch(getBrowse());
 
     // dispatch(getUserApi({ token: `bearer ${localStorage.getItem("Token")}` }));
-    console.log(bookState.classics);
+    
   }, []);
   const bookState = useSelector((state) => state.Store.Book);
   if (!authenticated()) {
     dispatch(notLoggedIn());
     return <Navigate to="/login" />;
   }
-  console.log(bookState);
+ 
   return (
     <div>
-      <div
-        className="carouselContain"
-        style={{ backgroundColor: "var(--black)" }}
-      >
-        <h3 style={{ color: "white" }}>NY Best Sellers</h3>
-        <Swiper
-          slidesPerView={"auto"}
-          centeredSlides={true}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          breakpoints={{
-            // when window width is >= 480px
-            700: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            // when window width is >= 640px
-            1000: {
-              slidesPerView: 3,
-              spaceBetween: 40,
-            },
-          }}
-          className="mySwiper"
-        >
-          {bookState.nytBestSellers.map((book) => (
-            <SwiperSlide key={uniqid()}>
-              <PublicUrlCards category="nytBestSellers" book={book} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <div>
+      <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+    
+      <Link to="/browse" style={{textDecoration: "none", color: "black"}}><Tab label="Browse">  </Tab></Link>
+      <Link to="/browse/search" style={{textDecoration: "none", color: "black"}}><Tab label="Search">  </Tab></Link>
+        
+         
+        </Tabs>
+
       </div>
-      <div
-        className="carouselContain"
-        style={{ backgroundColor: "var(--lightBlack)" }}
-      >
-        <h3 style={{ color: "white" }}>Classics</h3>
-        <Swiper
-          slidesPerView={"auto"}
-          centeredSlides={true}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          breakpoints={{
-            // when window width is >= 480px
-            700: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            // when window width is >= 640px
-            1000: {
-              slidesPerView: 3,
-              spaceBetween: 40,
-            },
-          }}
-          className="mySwiper"
-        >
-          {bookState.classics.map((book, index) => (
-            <SwiperSlide key={uniqid()}>
-              <PublicUrlCards category="classics" book={book} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <Routes>
+      <Route path="/" element={<BrowseComponent/>}/>
+      <Route path="search" element={<Search/>}/>
+      <Route  path=":id/:category" element={<ViewBook/>}/>
+          <Route  path="viewLink/:id/:category" element={<ViewUserLinkBook/>}/>
+        
+      
+     
+      </Routes>
       
     </div>
   );

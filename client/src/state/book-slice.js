@@ -8,11 +8,45 @@ const slice = createSlice({
         error: '',
         nytBestSellers: [],
         classics: [],
+        search: [],
         view: {}
     },
     reducers: {
-        setBooks: (Book, action) => {
-             Book = action.payload
+        setSearch: (Book, action) => {
+            console.log(action.payload.items)
+
+            let adjusted = action.payload.items.map(book => {
+                let title = book.volumeInfo.title;
+                let authors;
+                if (book.volumeInfo.authors) {
+                  authors = "by" + " " + book.volumeInfo.authors[0];
+                } else {
+                  authors = "No Author Available";
+                }
+                let image;
+                if (book.volumeInfo.imageLinks) {
+                  image =
+                    book.volumeInfo.imageLinks.thumbnail ||
+                    book.volumeInfo.imageLinks.smallThumbnail;
+                } else {
+                  image = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png`;
+                }
+                let description;
+                if (book.volumeInfo.description) {
+                  description = book.volumeInfo.description;
+                } else {
+                  description = "No Description Available";
+                }
+                return {
+                    id: book.id,
+                    author: authors,
+                    title: title,
+                    description: description,
+                    thumbnail: image,
+                    externalLink: book.volumeInfo.infoLink
+                  }
+            })
+             Book.search = adjusted
         },
         setBrowse: (Book, action) => {
             console.log(action.payload)
@@ -45,13 +79,13 @@ const slice = createSlice({
 })
 
 
-export const {setBooks,success, resetErrorSuccess,  error, setBrowse, setView} = slice.actions
+export const {setSearch,success, resetErrorSuccess,  error, setBrowse, setView} = slice.actions
 
 export default slice.reducer
 
-export const getBooks = (book) => apiCallBegan({
+export const searchBooks = (book) => apiCallBegan({
     url: `https://www.googleapis.com/books/v1/volumes?q=` + book,
-    onSuccess: setBooks.type,
+    onSuccess: setSearch.type,
     onError: error.type,
 
 })

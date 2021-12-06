@@ -36,13 +36,13 @@ export default function Dashboard() {
   }
  console.log(state)
   return (
-    <div className="mainPageContain">
-      <div id="dashboardMe">
+    <div className="mainPageContain" style={{color: "white"}}>
+      <div id="dashboardMe"  style={{ backgroundColor: "var(--lightBlack)" }}>
         <p id="dashboardText">Hey There {state.firstName + " " + state.lastName}!</p>
         <span>Here is what we have going on:</span>
         <div id="statsBoxWraper">
           <div className="statsBox">
-            <p>Number of Friends</p>
+            <p>Number of connections</p>
             <h3>{state.connection.length}</h3>
             
 
@@ -57,7 +57,7 @@ export default function Dashboard() {
 
           </div>
           <div className="statsBox">
-            <p>Books in reading list</p>
+            <p>Books in your reading list</p>
             <h3>{state.readingList.length}</h3>
             
 
@@ -69,7 +69,7 @@ export default function Dashboard() {
       </div>
       <div
         className="carouselContain"
-        style={{ backgroundColor: "var(--lightgreen)" }}
+        style={{ backgroundColor: "var(--black)" }}
       >
         <h3>Recommended By Your Connections</h3>
         <Swiper
@@ -104,7 +104,7 @@ export default function Dashboard() {
       </div>
       <div
         className="carouselContain"
-        style={{ backgroundColor: "var(--green)" }}
+        style={{ backgroundColor: "var(--lightBlack)" }}
       >
         <h3>Your Friends Are Reading</h3>
         <Swiper
@@ -143,7 +143,7 @@ export default function Dashboard() {
       </div>
       <div
         className="carouselContain"
-        style={{ backgroundColor: "var(--green)" }}
+        style={{ backgroundColor: "var(--black)" }}
       >
         <h3>Books in your reading list</h3>
         <Swiper
