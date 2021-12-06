@@ -3,7 +3,7 @@ import { setView } from "../../state/book-slice";
 import { useDispatch, useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { addCurrentReading, addreadingList,  setUView , removeRecommendedBook} from "../../state/user-slice";
+import { addCurrentReading, addreadingList,  setUView , removeBookFromList} from "../../state/user-slice";
 import { authenticated } from "../../utils";
 import { Navigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -66,11 +66,12 @@ export default function ViewUserLinkBook() {
     );
   };
 
-  const handleRemoveFromRecommended = () => {
+  const handleRemoveFromList = () => {
     dispatch(
-      removeRecommendedBook({
+      removeBookFromList({
         token: `bearer ${localStorage.getItem("Token")}`,
         book: view,
+        target: window.location.pathname.split("/")[4]
       })
     );
   }
@@ -131,13 +132,14 @@ export default function ViewUserLinkBook() {
                 </Button>
               </a>
             </Grid>
-            <Grid className="centerAlign" xs={12} item>
+            {window.location.pathname.split("/")[4] === "readingList" || window.location.pathname.split("/")[4] === "recommended" ? <Grid className="centerAlign" xs={12} item>
              
-                <Button onClick={handleRemoveFromRecommended} style={{ width: "250px" }} variant="contained">
-                  Remove
-                </Button>
+             <Button onClick={handleRemoveFromList} style={{ width: "250px" }} variant="contained">
+               Remove
+             </Button>
+         
+         </Grid> : <></>}
             
-            </Grid>
           </Grid>
         </Grid>
       </Grid>

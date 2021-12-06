@@ -120,20 +120,46 @@ router.put("/recommend", parseToken, async (req, res) => {
     res.status(400).send(err.message);
   }
 });
-router.put("/remove-recommend", parseToken, async (req, res) => {
+router.put("/remove-from-list", parseToken, async (req, res) => {
   console.log(req.body)
-  try {
-    await User.findByIdAndUpdate(
-      res.locals._id,
-      {
-        $pull: { recommended: req.body.book},
-      },
-      { new: true }
-    );
-    res.sendStatus(201);
-  } catch (err) {
-    res.status(400).send(err.message);
+  switch (req.body.target) {
+    case "recommended":
+      try {
+        await User.findByIdAndUpdate(
+          res.locals._id,
+          {
+            $pull: { recommended: req.body.book},
+          },
+          { new: true }
+        );
+        res.sendStatus(201);
+      } catch (err) {
+        res.status(400).send(err.message);
+      }
+      
+      break;
+
+      case "readingList":
+        try {
+          await User.findByIdAndUpdate(
+            res.locals._id,
+            {
+              $pull: { readingList: req.body.book},
+            },
+            { new: true }
+          );
+          res.sendStatus(201);
+        } catch (err) {
+          res.status(400).send(err.message);
+        }
+        
+        break;
+  
+    default:
+      res.status(500)
   }
+  
+  
 });
 
 router.put("/currentreading", parseToken, async (req, res) => {

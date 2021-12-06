@@ -223,8 +223,8 @@ export const addRecommendation = (data) => apiCallBegan({
 })
 
 
-export const removeRecommendedBook = (data) => apiCallBegan({
-    url: "http://localhost:8080/protected/api/remove-recommend",
+export const removeBookFromList = (data) => apiCallBegan({
+    url: "http://localhost:8080/protected/api/remove-from-list",
     headers: {
         authorization: data.token,
     },
