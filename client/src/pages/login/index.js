@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {handleFormInput} from "../../utils"
 import {useDispatch, useSelector} from "react-redux"
-import {loginUserApi, resetSuccess} from "../../state/user-slice"
+import {loginUserApi, resetSuccess, resetError} from "../../state/user-slice"
 import {  Navigate, Link } from 'react-router-dom'
+import ErrorMessage from "../../components/error"
 import "./style.css"
 
 export default function Login() {
@@ -13,23 +14,24 @@ export default function Login() {
   
     const dispatch = useDispatch()
     const user = useSelector(state =>  state.Store.User)
+    const error = useSelector(state => state.Store.User.Error)
 
-
+useEffect(() => {
+    return () => {
+        dispatch(resetError())
+    }
+}, [])
    const handleLogin = (event) => {
        event.preventDefault()
        dispatch(loginUserApi(login))
    }
-// if(user.success){
-//     console.log(user)
-//     let route = `/dashboard`
-//     return <Navigate to={route} />;
-// }
+
     return (
         <div className="entryContain" >
            
-
+         
             <form onSubmit={handleLogin} className="entryForm ">
-       
+            {error ? <ErrorMessage message={error}/> : <></>}
                 <section className="inputGrandparent">
                 <div className="centerAlign inputParent">
                 <input onChange={(event)=> {handleFormInput(event, login, setLogin)}} placeholder="Email" name="email" value={login.email}></input>
@@ -46,7 +48,7 @@ export default function Login() {
                 <Link to="/create-account">Dont have an account?</Link>
             </div>
             </form>
-
+           
             <div className="entryRows">
                 <div className="firstCol"></div>
                 <div className="secCol"></div>

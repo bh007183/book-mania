@@ -23,11 +23,9 @@ const slice = createSlice({
     reducers: {
         setToken: (User, action) => {
             localStorage.setItem("Token", action.payload.token)
-            // User.UserId = action.payload._id
             window.location.replace("/dashboard") 
         },
      
-        
         error: (User, action) => {
             console.log(action)
             User.Error = action.payload
@@ -38,10 +36,7 @@ const slice = createSlice({
             }else{
                 User.Success = true
             }
-            
-
         },
-
         resetError: (User, action) => {
             User.Error = ""
         },
@@ -87,9 +82,17 @@ const slice = createSlice({
             User.loggedIn = ""
         },
         setUView: (User, action) => {
+            let book;
             console.log(action.payload)
             console.log(User.recommended)
-            let book = User.recommended.filter(book => book._id === action.payload.id)[0]
+            if(User[action.payload.category]){
+                book = User[action.payload.category].filter(book => book._id === action.payload.id)[0]
+            }else{
+                book = User.connection.filter(connection => connection.usercurrent._id === action.payload.id)[0]
+                book = book.usercurrent
+            }
+           
+            
             User.view = book
 
         }

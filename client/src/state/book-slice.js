@@ -33,60 +33,9 @@ const slice = createSlice({
 
 
         setView: (Book, action) => {
-            
-            let uniqeObj;
-            let standardObj;
-            console.log(uniqeObj)
-            //If Book data came from NYT API
-            if(action.payload.category === "nytBestSellers"){
-                uniqeObj = Book[action.payload.category].filter(book =>  book.primary_isbn13 === action.payload.id)[0]
-                standardObj = {
-                    title: uniqeObj.title,
-                    author: uniqeObj.author,
-                    description: uniqeObj.description,
-                    thumbnail: uniqeObj.book_image,
-                    externalLink: uniqeObj.amazon_product_url
-
-                }
-            }else{
-                //If Book data came from google API
-                uniqeObj = Book[action.payload.category].filter(book => book.id  === action.payload.id)[0]
-                let title = uniqeObj.volumeInfo.title;
-                let authors;
-                let description;
-                let image;
-                let externalLink;
-                if (uniqeObj.volumeInfo.authors) {
-                  authors = "by" + " " + uniqeObj.volumeInfo.authors[0];
-                } else {
-                  authors = "No Author Available";
-                }
-                if (uniqeObj.volumeInfo.imageLinks) {
-                  image =
-                    uniqeObj.volumeInfo.imageLinks.thumbnail ||
-                    uniqeObj.volumeInfo.imageLinks.smallThumbnail;
-                } else {
-                  image = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png`;
-                }
-                if (uniqeObj.volumeInfo.description) {
-                  description = uniqeObj.volumeInfo.description;
-                } else {
-                  description = "No Description Available";
-                }
-                if(uniqeObj.volumeInfo.infoLink){
-                    externalLink = uniqeObj.volumeInfo.infoLink
-                }
-
-                standardObj = {
-                    title: title,
-                    author: authors,
-                    description: description,
-                    thumbnail: image,
-                    externalLink: externalLink
-
-                }
-            }
-            Book.view = standardObj
+            let uniqeObj = Book[action.payload.category].filter(book => book.id  === action.payload.id)[0]
+      
+            Book.view = uniqeObj
 
         },
 

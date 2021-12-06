@@ -119,7 +119,7 @@ export default function Nav() {
   return (
     <header className={classes.root}>
       <CssBaseline />
-      <AppBar>
+      <AppBar >
         <Toolbar>
           <div id="logoContain">
             <Typography id="logoText" variant="h4" noWrap>

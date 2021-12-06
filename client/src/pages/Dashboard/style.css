@@ -12,15 +12,14 @@
 }
 #statsBoxWraper{
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;justify-content: space-evenly;
 }
-#statsBox1{
+.statsBox{
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
  
   
-}
-#statsBox2{
-  text-align: center;
-  
-
 }
