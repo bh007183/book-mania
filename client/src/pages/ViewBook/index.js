@@ -65,7 +65,7 @@ export default function ViewBook() {
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} style={{backgroundColor: "var(--light)"}}>
         <Grid item xs={12}>
           <h1 className="centerAlign">{view.title}</h1>
         </Grid>
@@ -77,7 +77,7 @@ export default function ViewBook() {
           </div>
         </Grid>
         <Grid item xs={12} md={4}>
-          <p>{view.description}</p>
+          <p style={{padding: "10px"}}>{view.description}</p>
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container spacing={2}>

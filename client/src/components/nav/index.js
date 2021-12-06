@@ -16,14 +16,17 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import EmailIcon from "@material-ui/icons/Email";
-import GroupWorkIcon from "@material-ui/icons/GroupWork";
+import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from "@material-ui/icons/Info";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import { Hidden } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 import {notLoggedIn} from "../../state/user-slice"
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import {useDispatch} from "react-redux"
-
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -229,8 +232,8 @@ export default function Nav() {
         </div>
         <Divider />
         <List>
-          <Link name="home" onClick={handleDrawerClose} className="link" to="/">
-            <ListItem button>
+          <Link name="home" style={{padding: "10px !important"}} onClick={handleDrawerClose} className="link" to="/">
+            <ListItem  button>
               <ListItemIcon>
                 {" "}
                 <HomeIcon className="icon" />
@@ -240,10 +243,10 @@ export default function Nav() {
           </Link>
           <Divider />
           <Link
-            name="whoWeAre"
+           
             onClick={handleDrawerClose}
             className="link"
-            to="/who-we-are"
+            to="/dashboard"
           >
             <ListItem button>
               <ListItemIcon>
@@ -255,26 +258,86 @@ export default function Nav() {
           </Link>
           <Divider />
           <Link
-            name="contact"
+            
             onClick={handleDrawerClose}
             className="link"
-            to="/contact"
+            to="/browse"
           >
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <EmailIcon className="icon" />
+                <ManageSearchIcon className="icon" />
+              </ListItemIcon>
+              <ListItemText primary="Browse" />
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link
+            name="contact"
+            onClick={handleDrawerClose}
+            className="link"
+            to="/notifications"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                {" "}
+                <NotificationsIcon className="icon" />
+              </ListItemIcon>
+              <ListItemText primary="Notifications" />
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link
+            name="contact"
+            onClick={handleDrawerClose}
+            className="link"
+            to="/manage-account"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                {" "}
+                <ManageAccountsIcon className="icon" />
               </ListItemIcon>
               <ListItemText primary="Manage Account" />
             </ListItem>
           </Link>
           <Divider />
+          <Link
+            name="contact"
+            onClick={handleDrawerClose}
+            className="link"
+            to="/manage-connections"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                {" "}
+                <ConnectWithoutContactIcon className="icon" />
+              </ListItemIcon>
+              <ListItemText primary="Manage Connections" />
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link className="link"
+                    onClick={() => {
+                      dispatch(notLoggedIn())
+                      localStorage.clear()
+                      handleDrawerClose()
+                    }}
+                      to="/login"
+                    
+                    >
+            <ListItem button>
+              <ListItemIcon>
+                {" "}
+                <LogoutIcon className="icon" />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItem>
+          </Link>
+          
 
           <Divider />
-          <ListItem
-            style={{ display: "flex", justifyContent: "center" }}
-          ></ListItem>
-          <Divider />
+         
         </List>
       </Drawer>
     </header>
