@@ -28,6 +28,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <div style={{position: "relative"}}>
         <Nav/>
         <Routes>
          
@@ -41,10 +42,11 @@ function App() {
 
           <Route path="*" element={<NoMatch/>} />
         </Routes>
-        <BottomNavigation className="alignCenter" style={{backgroundColor: "var(--blue)", height: "50px"}}>
+        <BottomNavigation style={{position: "absolute", bottom: "0px"}} className="alignCenter" style={{backgroundColor: "var(--blue)", height: "50px"}}>
           <p><a href="https://github.com/bh007183/book-mania" target="_blank" style={{color: "white"}}>Book-Mania Code Base</a></p>
                           
         </BottomNavigation>
+        </div>
       </Router>
     
     </Provider>

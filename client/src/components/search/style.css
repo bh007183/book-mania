@@ -1,4 +1,11 @@
-#searchResultContain{
-    display: flex;
-    flex-wrap: wrap;
+
+#searchForm{
+    background-color: var(--darkgreen);
+    height: 40px;
+}
+#searchForm > input{
+    border-radius: 5px;
+    height: 25px;
+    width: 200px;
+    border: none
 }

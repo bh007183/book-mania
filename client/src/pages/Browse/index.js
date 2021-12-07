@@ -27,16 +27,16 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "./style.css";
 export default function Browse() {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(0);
+  // const [value, setValue] = React.useState(0);
 
-  const handleChange = (event) => {
-    if(value === 0) {
-      setValue(1)
-    }else{
-      setValue(0)
-    }
+  // const handleChange = (event) => {
+  //   if(value === 0) {
+  //     setValue(1)
+  //   }else{
+  //     setValue(0)
+  //   }
    
-  };
+  // };
   useEffect(() => {
     dispatch(getBrowse());
 
@@ -52,7 +52,7 @@ export default function Browse() {
   return (
     <div>
       <div>
-      <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+      <Tabs aria-label="basic tabs example">
     
       <Link to="/browse" style={{textDecoration: "none", color: "black"}}><Tab label="Browse">  </Tab></Link>
       <Link to="/browse/search" style={{textDecoration: "none", color: "black"}}><Tab label="Search">  </Tab></Link>

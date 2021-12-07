@@ -78,6 +78,7 @@ export default function ViewUserLinkBook() {
 
   return (
     <>
+    <br></br>
       <Grid container spacing={2} style={{backgroundColor: "var(--light"}}>
         <Grid item xs={12}>
           <h1 className="centerAlign">{view.title}</h1>
