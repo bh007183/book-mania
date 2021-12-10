@@ -57,7 +57,7 @@ const slice = createSlice({
             User.connection = User.connection.filter(user => user._id !== action.payload._id)
         },
         setUser: (User, action) => {
-            
+            console.log("set user")
             User.firstName = action.payload.firstName;
             User.lastName= action.payload.lastName;
             User.email = action.payload.email;
@@ -68,6 +68,7 @@ const slice = createSlice({
             User.usercurrent=action.payload.usercurrent
             User.readingHistory = action.payload.readingHistory
             User.loggedIn = true
+            User.view = {}
         },
         notLoggedIn: (User, action) => {
             User.firstName = "";
@@ -82,6 +83,7 @@ const slice = createSlice({
             User.loggedIn = ""
         },
         setUView: (User, action) => {
+           console.log("set user book")
             let book;
             console.log(action.payload)
             console.log(User.recommended)

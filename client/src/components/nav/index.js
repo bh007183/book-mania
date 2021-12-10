@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -33,6 +33,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import LoginIcon from '@mui/icons-material/Login';
+import jwt_decode from "jwt-decode";
+import {getUserApi} from "../../state/user-slice"
+import {getBrowse} from "../../state/book-slice"
+import swal from 'sweetalert';
 
 import "./style.css";
 const ITEM_HEIGHT = 48;
@@ -117,6 +121,30 @@ export default function Nav() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  useEffect(() => {
+    let token = localStorage.getItem("Token") || null;
+    let currentTime = Date.now()
+    
+    if(token){
+      let decoded = jwt_decode(token);
+      if (Math.floor(currentTime/1000) > decoded.exp) {
+          swal({
+            title: "Session Expired!",
+            text: "You must first login",
+            icon: "warning",
+            dangerMode: false,
+          })
+       notLoggedIn()
+        return false;
+      } else {
+        console.log("Nav render")
+        dispatch(getUserApi({ token: `bearer ${localStorage.getItem("Token")}` }))
+        dispatch(getBrowse())
+      }
+  
+    }
+    
+  }, [])
 
   const label = { inputProps: { "aria-label": "Translate" } };
 

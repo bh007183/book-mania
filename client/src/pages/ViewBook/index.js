@@ -33,7 +33,7 @@ export default function ViewBook() {
       dispatch(setView(obj));
    
     
-  }, []);
+  }, [view]);
 
   const [open, setOpen] = React.useState(false);
   // Handle Model Open Close
@@ -67,7 +67,7 @@ export default function ViewBook() {
 
   return (
     <>
-    <br></br>
+    {view ? <> <br></br> 
       <Grid container spacing={2} style={{backgroundColor: "var(--light)"}}>
         <Grid item xs={12}>
           <h1 className="centerAlign">{view.title}</h1>
@@ -145,6 +145,8 @@ export default function ViewBook() {
           </Box>
      </>
       </Modal>
-    </>
+      </>
+      : <h1>..loading</h1>}
+       </>
   );
 }

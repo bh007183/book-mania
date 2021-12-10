@@ -52,6 +52,7 @@ const slice = createSlice({
             console.log(action.payload)
             Book.nytBestSellers = action.payload.nytBestSellers
             Book.classics = action.payload.classics
+            Book.view = {}
         },
         success: (Book) => {
              Book.success = true
