@@ -21,6 +21,7 @@ export default function ViewBook() {
   // let error = useSelector(state => state.Store.Book.error)
   
   let friendList = useSelector((state) => state.Store.User.connection)
+  let loggedIn = useSelector((state) => state.Store.User.loggedIn)
 
   useEffect(() => {
      dispatch(resetErrorSuccess())
@@ -40,10 +41,11 @@ export default function ViewBook() {
   const handleClose = () => {
     setOpen(false);
   };
-  if (!authenticated()) {
-    dispatch(notLoggedIn());
-    return <Navigate to="/login" />;
-  }
+
+  // if (!authenticated()) {
+  //   dispatch(notLoggedIn());
+  //   return <Navigate to="/login" />;
+  // }
   console.log(view);
   const handleCurrentRead = () => {
     console.log("it works");
@@ -82,7 +84,7 @@ export default function ViewBook() {
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container spacing={2}>
-            <Grid className="centerAlign" xs={12} item>
+            {loggedIn ? <><Grid className="centerAlign" xs={12} item>
               <Button
                 onClick={handleCurrentRead}
                 style={{ width: "250px" }}
@@ -108,7 +110,8 @@ export default function ViewBook() {
               >
                 Recommend To Friend
               </Button>
-            </Grid>
+            </Grid> </>: <></>}
+            
             <Grid className="centerAlign" xs={12} item>
               <a
                 style={{ textDecoration: "none" }}

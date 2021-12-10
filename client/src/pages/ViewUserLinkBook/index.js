@@ -23,6 +23,7 @@ export default function ViewUserLinkBook() {
   
 
   let friendList = useSelector((state) => state.Store.User.connection)
+  
   useEffect(() => {
     let data = window.location.pathname.split("/");
     
@@ -43,10 +44,14 @@ export default function ViewUserLinkBook() {
   const handleClose = () => {
     setOpen(false);
   };
-  if (!authenticated()) {
-    dispatch(notLoggedIn());
-    return <Navigate to="/login" />;
-  }
+
+  
+    // if (!authenticated()) {
+    //   dispatch(notLoggedIn());
+    //   return <Navigate to="/login" />;
+    // }
+  
+
   console.log(view);
   const handleCurrentRead = () => {
     console.log("it works");

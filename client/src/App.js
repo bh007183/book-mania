@@ -31,7 +31,7 @@ function App() {
         <div style={{position: "relative"}}>
         <Nav/>
         <Routes>
-         
+        <Route path="/" element={<Browse/>}/>
           <Route exact path="/dashboard" element={<Dashboard protect={true}/>}/>
           <Route exact path="/manage-account" element={<ManageAccount/>}/>
           <Route exact path="/manage-connections" element={<ManageConnection/>}/>
