@@ -45,16 +45,11 @@ export default function Browse() {
   }, []);
   const bookState = useSelector((state) => state.Store.Book);
 
-  // if(window.location.pathname.split("/").includes("browse")){
-  //   if (!authenticated()) {
-  //     dispatch(notLoggedIn());
-  //     return <Navigate to="/login" />;
-  //   }
-  // }
+
   
  
   return (
-    <div>
+    <div id="browseContain">
       <div>
       <Tabs aria-label="basic tabs example">
     

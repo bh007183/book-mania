@@ -25,13 +25,14 @@ import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 import {notLoggedIn} from "../../state/user-slice"
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import LoginIcon from '@mui/icons-material/Login';
 
 import "./style.css";
 const ITEM_HEIGHT = 48;
@@ -108,7 +109,7 @@ export default function Nav() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  let loggedIn = useSelector(state => state.Store.User.loggedIn)
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -137,12 +138,13 @@ export default function Nav() {
           </div>
           <div id="navLinksContain">
             <Hidden smDown>
-              <Link to="/dashboard" className="navLinks">
-                Dashboard
-              </Link>
-              <Link to="/browse" className="navLinks">
+            <Link to="/browse" className="navLinks">
                 Browse
               </Link>
+              {loggedIn ? <><Link to="/dashboard" className="navLinks">
+                Dashboard
+              </Link>
+              
 
               <FormControl sx={{ m: 1, width: 150, borderColore: "white" }}>
                 <InputLabel
@@ -194,7 +196,10 @@ export default function Nav() {
                     </Link>
                   </MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl></>: <Link to="/login" className="navLinks">
+               Login
+              </Link>}
+              
 
               {/* checked={language} */}
             </Hidden>
@@ -231,8 +236,25 @@ export default function Nav() {
           </IconButton>
         </div>
         <Divider />
+        
         <List>
-          <Link name="home" style={{padding: "10px !important"}} onClick={handleDrawerClose} className="link" to="/">
+        <Link
+            
+            onClick={handleDrawerClose}
+            className="link"
+            to="/browse"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                {" "}
+                <ManageSearchIcon className="icon" />
+              </ListItemIcon>
+              <ListItemText primary="Browse" />
+            </ListItem>
+          </Link>
+          <Divider />
+          {loggedIn ? <> 
+            <Link name="home" style={{padding: "10px !important"}} onClick={handleDrawerClose} className="link" to="/">
             <ListItem  button>
               <ListItemIcon>
                 {" "}
@@ -257,21 +279,7 @@ export default function Nav() {
             </ListItem>
           </Link>
           <Divider />
-          <Link
-            
-            onClick={handleDrawerClose}
-            className="link"
-            to="/browse"
-          >
-            <ListItem button>
-              <ListItemIcon>
-                {" "}
-                <ManageSearchIcon className="icon" />
-              </ListItemIcon>
-              <ListItemText primary="Browse" />
-            </ListItem>
-          </Link>
-          <Divider />
+          
           <Link
             name="contact"
             onClick={handleDrawerClose}
@@ -336,7 +344,22 @@ export default function Nav() {
           </Link>
           
 
-          <Divider />
+          <Divider /></> : <><Link
+            
+            onClick={handleDrawerClose}
+            className="link"
+            to="/login"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                {" "}
+                <LoginIcon className="icon" />
+              </ListItemIcon>
+              <ListItemText primary="Login" />
+            </ListItem>
+          </Link>
+          <Divider /></>}
+          
          
         </List>
       </Drawer>

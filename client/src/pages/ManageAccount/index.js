@@ -90,7 +90,7 @@ export default function ManageAccount() {
             <div id="editContain">
               <div className="inputContain">
                 <input onChange={(event) => {handleFormInput(event, edit, setEdit)}} ref={firstNameEl} disabled={true} placeholder={state.firstName} name="firstName" value={edit.firstName} ></input>
-                <ListItem width="100px" button onClick={()=>editStuff(firstNameEl)}>
+                <ListItem width="100px" onClick={()=>editStuff(firstNameEl)}>
               <ListItemIcon> <EditIcon style={{color: "black"}} className="icon" /></ListItemIcon>
               <ListItemText primary="Edit First Name" />
             </ListItem>

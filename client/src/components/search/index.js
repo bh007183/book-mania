@@ -24,13 +24,13 @@ export default function Search() {
 
     
     return (
-        <div>
+        <div className="bookSearchContain" >
             <form onSubmit={handleSearch} id="searchForm" className="centerAlign">
                 <input onChange={(event) => handleFormInput(event, search, setSearch)} name="title" value={search.title} placeholder="Book Title"></input>
-                <Button style={{marginLeft: "15px", height: "27px"}} variant="contained"><SearchIcon/></Button>
+                <Button type="submit" style={{marginLeft: "15px", height: "27px"}} variant="contained"><SearchIcon/></Button>
             </form>
-            <div id="searchResultContain">
-                {results ? results.map(book => <PublicUrlCards category="search" book={book}/> ): <></>}
+            <div id="searchResultContain bookSearchContain">
+                {results.length > 0 ? results.map(book => <PublicUrlCards category="search" book={book}/> ): <h3 className="noResults">No Search Results</h3>}
 
             </div>
             
