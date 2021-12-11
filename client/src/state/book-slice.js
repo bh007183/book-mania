@@ -91,7 +91,7 @@ export const searchBooks = (book) => apiCallBegan({
 
 })
 export const getBrowse = () => apiCallBegan({
-    url: "http://localhost:8080/public/api/browse",
+    url: "https://bjh-book-mania-123.herokuapp.com/public/api/browse",
     onSuccess: setBrowse.type,
     onError: error.type,
 

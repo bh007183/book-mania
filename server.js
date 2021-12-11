@@ -11,11 +11,11 @@ var PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// var corsOptions = {
-//   origin: 'https://bjh-book-mania-123.herokuapp.com'
-// }
+var corsOptions = {
+  origin: 'https://bjh-book-mania-123.herokuapp.com'
+}
 // corsOptions
-app.use(cors());
+app.use(cors(corsOptions));
 // Static directory
 // app.use(express.static("public"));
 /////////////////////////////////
@@ -27,13 +27,13 @@ app.use(cors());
 app.use(require("./routes"))
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "/client/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
+});
 
 // Change force: to true if it's cool for the site to remove database items.
 db.once("open", ()=>{
