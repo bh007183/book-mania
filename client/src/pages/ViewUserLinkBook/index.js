@@ -8,6 +8,9 @@ import { authenticated } from "../../utils";
 import { Navigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import FriendCube from "../../components/FriendCube"
+import SuccessMessage from "../../components/success"
+import ErrorMessage from "../../components/success"
+import {resetSuccess,  resetError} from "../../state/user-slice";
 import "./style.css";
 import {
   notLoggedIn,
@@ -21,7 +24,15 @@ export default function ViewUserLinkBook() {
 
   let view = useSelector((state) => state.Store.User.view)
   
+  let success = useSelector((state) => state.Store.User.Success)
+  let error = useSelector((state) => state.Store.User.Error)
 
+  if(success || error){
+    setTimeout(() => {
+      dispatch(resetSuccess())
+      dispatch(resetError())
+    }, 5000)
+  }
   let friendList = useSelector((state) => state.Store.User.connection)
   
   useEffect(() => {
@@ -100,6 +111,8 @@ export default function ViewUserLinkBook() {
           </Grid>
           <Grid item xs={12} md={4}>
             <Grid container spacing={2}>
+            {success ?<Grid item xs={12}> <SuccessMessage message={success}/><br></br> </Grid>  : <></>}
+          {error ?<Grid item xs={12}> <ErrorMessage message={success}/><br></br> </Grid>  : <></>}
               <Grid className="centerAlign" xs={12} item>
                 <Button
                   onClick={handleCurrentRead}

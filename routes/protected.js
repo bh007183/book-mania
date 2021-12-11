@@ -45,7 +45,7 @@ router.put("/connect/ask", parseToken, async (req, res) => {
       },
       { new: true }
     );
-    res.sendStatus(201);
+    res.status(200).json({message: req.body.followId});
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -132,7 +132,7 @@ router.put("/remove-from-list", parseToken, async (req, res) => {
           },
           { new: true }
         );
-        res.sendStatus(201);
+        res.status(200).json({message: "Book removed from recommended."});
       } catch (err) {
         res.status(400).send(err.message);
       }
@@ -148,7 +148,7 @@ router.put("/remove-from-list", parseToken, async (req, res) => {
             },
             { new: true }
           );
-          res.sendStatus(201);
+          res.status(200).json({message:"Book removed from readingList."});;
         } catch (err) {
           res.status(400).send(err.message);
         }
@@ -172,7 +172,7 @@ router.put("/currentreading", parseToken, async (req, res) => {
       },
       { new: true }
     );
-    res.sendStatus(201);
+    res.status(200).json({message: "Book set as currently reading."});
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -188,7 +188,7 @@ router.put("/readinglist", parseToken, async (req, res) => {
       { new: true }
     );
     console.log(user);
-    res.sendStatus(201);
+    res.status(200).send({message:"Book added to reading list."});
   } catch (err) {
     res.status(400).send(err.message);
   }

@@ -13,6 +13,7 @@ import {
 import { Navigate } from "react-router-dom";
 import { authenticated, handleFormInput } from "../../utils";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import FriendComponent from "../../components/SendRequestButton"
 
 import "./style.css";
 
@@ -108,23 +109,8 @@ export default function ManageConnection() {
                         <p>{user.firstName + " " + user.lastName}</p>
                       </div>
                       <div className="buttonColumn">
-                        {success ? (
-                          <button
-                            onClick={addConnection}
-                            disabled={true}
-                            className="addUserButton"
-                          >
-                            Request Sent
-                          </button>
-                        ) : (
-                          <button
-                            onClick={addConnection}
-                            value={user._id}
-                            className="addUserButton"
-                          >
-                            Connect
-                          </button>
-                        )}
+                       
+                        <FriendComponent user={user} addConnection={addConnection}/>
                       </div>
                     </div>
                   </div>

@@ -8,8 +8,10 @@ import { addCurrentReading, addreadingList,  setUView } from "../../state/user-s
 import { authenticated } from "../../utils";
 import { Navigate } from "react-router-dom";
 import FriendCube from "../../components/FriendCube"
+import SuccessMessage from "../../components/success"
+import ErrorMessage from "../../components/success"
 import "./style.css";
-import {notLoggedIn} from "../../state/user-slice";
+import {notLoggedIn, resetSuccess,  resetError} from "../../state/user-slice";
 
 import Modal from "@mui/material/Modal";
 
@@ -22,6 +24,15 @@ export default function ViewBook() {
   
   let friendList = useSelector((state) => state.Store.User.connection)
   let loggedIn = useSelector((state) => state.Store.User.loggedIn)
+  let success = useSelector((state) => state.Store.User.Success)
+  let error = useSelector((state) => state.Store.User.Error)
+
+  if(success || error){
+    setTimeout(() => {
+      dispatch(resetSuccess())
+      dispatch(resetError())
+    }, 5000)
+  }
 
   useEffect(() => {
      dispatch(resetErrorSuccess())
@@ -69,6 +80,7 @@ export default function ViewBook() {
     <>
     {view ? <> <br></br> 
       <Grid container spacing={2} style={{backgroundColor: "var(--light)"}}>
+      
         <Grid item xs={12}>
           <h1 className="centerAlign">{view.title}</h1>
         </Grid>
@@ -84,6 +96,8 @@ export default function ViewBook() {
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container spacing={2}>
+          {success ?<Grid item xs={12}> <SuccessMessage message={success}/><br></br> </Grid>  : <></>}
+          {error ?<Grid item xs={12}> <ErrorMessage message={success}/><br></br> </Grid>  : <></>}
             {loggedIn ? <><Grid className="centerAlign" xs={12} item>
               <Button
                 onClick={handleCurrentRead}
