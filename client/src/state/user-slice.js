@@ -107,7 +107,7 @@ export const { error,setUView, setToken,notLoggedIn, resetSearch, updateConnecti
 export default slice.reducer
 
 export const createUserApi = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/public/api/user",
+    url: "http://localhost:8080/public/api/user",
     method: "POST",
     data,
     onSuccess: setToken.type,
@@ -115,7 +115,7 @@ export const createUserApi = (data) => apiCallBegan({
 
 })
 export const loginUserApi = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/public/api/login",
+    url: "http://localhost:8080/public/api/login",
     method: "POST",
     data,
     onSuccess: setToken.type,
@@ -123,7 +123,7 @@ export const loginUserApi = (data) => apiCallBegan({
 
 })
 export const getUserApi = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api",
+    url: "http://localhost:8080/protected/api",
     headers: {
         authorization: data.token,
     },
@@ -134,7 +134,7 @@ export const getUserApi = (data) => apiCallBegan({
 
 })
 export const updateUserApi = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/user",
+    url: "http://localhost:8080/protected/api/user",
     headers: {
         authorization: data.token,
     },
@@ -145,7 +145,7 @@ export const updateUserApi = (data) => apiCallBegan({
 
 })
 export const findUserApi = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/finduser/" + data.name,
+    url: "http://localhost:8080/protected/api/finduser/" + data.name,
     headers: {
         authorization: data.token,
     },
@@ -156,7 +156,7 @@ export const findUserApi = (data) => apiCallBegan({
 })
 
 export const addConnectionApi = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/connect/ask",
+    url: "http://localhost:8080/protected/api/connect/ask",
     headers: {
         authorization: data.token,
     },
@@ -167,7 +167,7 @@ export const addConnectionApi = (data) => apiCallBegan({
 
 })
 export const responseConnectionApi = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/connect/response",
+    url: "http://localhost:8080/protected/api/connect/response",
     headers: {
         authorization: data.token,
     },
@@ -178,7 +178,7 @@ export const responseConnectionApi = (data) => apiCallBegan({
 
 })
 export const removeConnectionAPI = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/remove/connection",
+    url: "http://localhost:8080/protected/api/remove/connection",
     headers: {
         authorization: data.token,
     },
@@ -190,7 +190,7 @@ export const removeConnectionAPI = (data) => apiCallBegan({
 })
 
 export const addCurrentReading = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/currentreading",
+    url: "http://localhost:8080/protected/api/currentreading",
     headers: {
         authorization: data.token,
     },
@@ -201,7 +201,7 @@ export const addCurrentReading = (data) => apiCallBegan({
 
 })
 export const addreadingList = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/readinglist",
+    url: "http://localhost:8080/protected/api/readinglist",
     headers: {
         authorization: data.token,
     },
@@ -213,7 +213,7 @@ export const addreadingList = (data) => apiCallBegan({
 })
 
 export const addRecommendation = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/recommend",
+    url: "http://localhost:8080/protected/api/recommend",
     headers: {
         authorization: data.token,
     },
@@ -226,7 +226,7 @@ export const addRecommendation = (data) => apiCallBegan({
 
 
 export const removeBookFromList = (data) => apiCallBegan({
-    url: "https://bjh-book-mania-123.herokuapp.com/protected/api/remove-from-list",
+    url: "http://localhost:8080/protected/api/remove-from-list",
     headers: {
         authorization: data.token,
     },
