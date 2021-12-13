@@ -37,7 +37,11 @@ app.get("*", (req, res) => {
  
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
-mongoose.connect(process.env.MONGO_DB || 'mongodb://localhost/book_mania')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/book_mania', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 // Change force: to true if it's cool for the site to remove database items.
 // db.once("open", ()=>{
     app.listen(PORT, function () {
