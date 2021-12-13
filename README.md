@@ -34,7 +34,7 @@
 
   ## Usage
 
-      As you would any other website. There are some accounts created that you can play with or you can use your own account. Feel free to login with an email  of Sinatra@gmail.com and password of password. You can also login with email of Ellington@gmail.com and again password for the password.
+   As you would any other website. There are some accounts created that you can play with or you can use your own account. Feel free to login with an email  of Sinatra@gmail.com and password of password. You can also login with email of Ellington@gmail.com and again password for the password.
   
   ## Technologies
 
