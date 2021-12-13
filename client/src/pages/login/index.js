@@ -37,7 +37,7 @@ useEffect(() => {
                 <input onChange={(event)=> {handleFormInput(event, login, setLogin)}} placeholder="Email" name="email" value={login.email}></input>
                 </div>
                 <div className="centerAlign inputParent">
-                <input onChange={(event)=> {handleFormInput(event, login, setLogin)}}  placeholder="Password" name="password" value={login.password}></input>
+                <input type="password" onChange={(event)=> {handleFormInput(event, login, setLogin)}}  placeholder="Password" name="password" value={login.password}></input>
                 </div>
                 
                 <div className="centerAlign inputParent">
