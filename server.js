@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const db = require("./config/db-connection");
+const mongoose = require("mongoose")
 const path = require("path")
 // Sets up the Express App
 require("dotenv").config()
@@ -16,7 +17,7 @@ var corsOptions = {
   origin: 'https://bjh-book-mania-123.herokuapp.com'
 }
 // corsOptions
-app.use(cors());
+app.use(cors(corsOptions));
 // Static directory
 // app.use(express.static("public"));
 /////////////////////////////////
@@ -25,18 +26,18 @@ app.use(cors());
 // Routes
 // =============================================================
 
-// app.use(require("./routes"))
+app.use(require("./routes"))
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-// if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-// }
+}
 
 app.get("*", (req, res) => {
-  console.log(path.join(__dirname, "/client/build/index.html"))
+ 
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
-
+mongoose.connect(process.env.MONGO_DB || 'mongodb://localhost/book_mania')
 // Change force: to true if it's cool for the site to remove database items.
 // db.once("open", ()=>{
     app.listen(PORT, function () {
