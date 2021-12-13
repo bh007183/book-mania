@@ -28,9 +28,9 @@ app.use(cors());
 app.use(require("./routes"))
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-}
+// }
 
 app.get("*", (req, res) => {
   console.log(path.join(__dirname, "/client/build/index.html"))
