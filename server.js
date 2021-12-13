@@ -25,7 +25,7 @@ app.use(cors());
 // Routes
 // =============================================================
 
-app.use(require("./routes"))
+// app.use(require("./routes"))
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 // if (process.env.NODE_ENV === "production") {
@@ -38,9 +38,10 @@ app.get("*", (req, res) => {
 });
 
 // Change force: to true if it's cool for the site to remove database items.
-db.once("open", ()=>{
+// db.once("open", ()=>{
     app.listen(PORT, function () {
         console.log("App listening on PORT http://localhost:" + PORT);
       })
-})
+      // })
+
   ;
